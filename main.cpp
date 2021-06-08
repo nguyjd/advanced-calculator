@@ -1,11 +1,31 @@
 #include "main.h"
 
+// Recursion function to calulate the factorial.
+// The function loops until n == 0
+BigInteger FindFactorial(const int n)
+{
+
+	// Base Condition.
+	if (n == 0)
+	{
+
+		return 1;
+
+	}
+
+	// This multiply the n * n-1
+	return static_cast<BigInteger>(n) * FindFactorial(n - 1);
+
+}
+
 int main()
 {
 
 	//test.TestingBigIntAdd(1000, false);
 
 	//test.TestingBigIntSub(1000, false);
+
+	//test.TestingBigIntAssignmentOperator(10000, true);
 
 	//test.TestingBigIntAdditionOperator(100000, true);
 	//test.TestingBigIntSubtractionOperator(100000, true);
@@ -23,10 +43,16 @@ int main()
 	//test.TestingBigIntGreaterThanComparisonOperator(500000, false);
 	//test.TestingBigIntLessThanOrEqualComparisonOperator(100000, false);
 	//test.TestingBigIntGreaterThanOrEqualComparisonOperator(100000, false);
+	//test.TestingBigIntLongMultiplication(100000, true);
+	test.TestingBigIntMathTiming(10000);
 	
+	const int numFact = 500;
+	BigInteger fact = FindFactorial(numFact);
 	
-	
-	a.SetInteger("99");
+	std::cout << numFact << "! = " << fact << std::endl;
+
+
+	a.SetInteger("0");
 
 	BigInteger c;
 
@@ -36,7 +62,7 @@ int main()
 
 	BigInteger d(80);
 
-	std::cout << d << std::endl;
+	//std::cout << d << std::endl;
 
 	c.AddToThis('1');
 
@@ -48,11 +74,12 @@ int main()
 
 	//a.SubToThis(b);
 
-	std::cin >> a;
+	a.LongMultiplicationToThis("99");
 
-	std::cout << a << std::endl;
-	std::cout << c << std::endl;
-	std::cout << d << std::endl;
+	//std::cout << a << std::endl;
+	//std::cout << fact << std::endl;
+	//std::cout << c << std::endl;
+	//std::cout << d << std::endl;
 
 	
 

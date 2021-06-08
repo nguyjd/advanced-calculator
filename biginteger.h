@@ -114,6 +114,9 @@ public:
 	 */
 	BigInteger operator-(const BigInteger& num);
 
+	// TODO: COMMENT THIS
+	BigInteger operator*(const BigInteger& num);
+
 	/** A overloaded increment operator */
 	BigInteger& operator++();
 	BigInteger operator++(int);
@@ -136,10 +139,11 @@ public:
 	bool operator>=(const BigInteger& num);
 	bool operator<=(const BigInteger& num);
 
+	void LongMultiplicationToThis(const std::string number);
+
 protected:
 
 	friend std::ostream& operator<<(std::ostream& output, const BigInteger& num);
-
 	friend std::istream& operator>>(std::istream& input, BigInteger& num);
 
 private:
@@ -164,10 +168,12 @@ private:
 	 * @param numStr - The number as the string.
 	 * @param numVec - The array storing the number.
 	 */
-	void ConvertBigIntegerToString(std::string& numStr, const std::deque<char> numVec);
+	void ConvertBigIntegerToString(std::string& numStr, const std::deque<char> numVec, const bool positive);
 
 	/** Removes leading zero from the number. */
 	void CleanUpNumber(std::deque<char>& numVec);
+
+	
 
 private:
 

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <random>
+#include <chrono>
 #include "time.h"
 #include "biginteger.h"
 
@@ -13,6 +14,10 @@ class Testing
 public:
 
 	Testing();
+
+	void TestingBigIntMathTiming(int trialsCount);
+
+	void TestingBigIntLongMultiplication(int trialsCount, bool stopOnFail);
 
 	void TestingBigIntGreaterThanOrEqualComparisonOperator(int trialsCount, bool stopOnFail);
 	void TestingBigIntLessThanOrEqualComparisonOperator(int trialsCount, bool stopOnFail);

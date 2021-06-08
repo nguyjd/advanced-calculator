@@ -154,7 +154,7 @@ std::string BigInteger::GetInteger()
 	{
 
 		/** Convert the number to a string and return the string. */
-		ConvertBigIntegerToString(strInteger, integer);
+		ConvertBigIntegerToString(strInteger, integer, positive);
 		return strInteger;
 
 	}
@@ -301,7 +301,7 @@ void BigInteger::AddToThis(const std::string number)
 	CleanUpNumber(integer);
 
 	/** Update the stored string */
-	ConvertBigIntegerToString(strInteger, integer);
+	ConvertBigIntegerToString(strInteger, integer, positive);
 
 }
 
@@ -618,7 +618,7 @@ void BigInteger::SubToThis(const std::string number)
 	CleanUpNumber(integer);
 
 	/** Update the stored string */
-	ConvertBigIntegerToString(strInteger, integer);
+	ConvertBigIntegerToString(strInteger, integer, positive);
 
 }
 
@@ -737,6 +737,15 @@ BigInteger BigInteger::operator+(const BigInteger& num)
 BigInteger BigInteger::operator-(const BigInteger& num)
 {
 	return Sub(num);
+}
+
+BigInteger BigInteger::operator*(const BigInteger& num)
+{
+
+	// TODO: REDO THE TEMP SOLUTION
+	BigInteger tempBigInt(*this);
+	tempBigInt.LongMultiplicationToThis(num.strInteger);
+	return tempBigInt;
 }
 
 BigInteger& BigInteger::operator++()
@@ -988,10 +997,10 @@ void BigInteger::ConvertStringToBigInteger(const std::string numStr, std::deque<
 
 }
 
-void BigInteger::ConvertBigIntegerToString(std::string& numStr, const std::deque<char> numVec)
+void BigInteger::ConvertBigIntegerToString(std::string& numStr, const std::deque<char> numVec, const bool positive)
 {
 	
-	/** Clear the deque */
+	/** Clear the string */
 	numStr.clear();
 
 	/** Add the negitive sign. */
@@ -1042,7 +1051,111 @@ void BigInteger::CleanUpNumber(std::deque<char>& numVec)
 	}
 
 	/** Update the string. */
-	ConvertBigIntegerToString(strInteger, integer);
+	ConvertBigIntegerToString(strInteger, integer, positive);
+
+}
+
+void BigInteger::LongMultiplicationToThis(const std::string number)
+{
+
+	/** The local arrays used for computation */
+	std::deque<char> firstNumber = integer;
+	std::deque<char> secondNumber;
+	bool firstNumberPositive = positive;
+	bool secondNumberPositive = true;
+
+	/** Check to ensure that both numbers are valid. */
+	if (!VerifyNumber(number) || !VerifyNumber(strInteger))
+	{
+
+		std::cout << "Invalid number to multiply." << std::endl;
+		return;
+
+	}
+
+	/** Convert the string into something usable. */
+	ConvertStringToBigInteger(number, secondNumber, secondNumberPositive);
+
+	/** This will set the first number to the largest number. */
+	if (firstNumber.size() < secondNumber.size())
+	{
+
+		/** Swap the numbers. */
+		std::deque<char> tempDeque = secondNumber;
+		secondNumber = firstNumber;
+		firstNumber = tempDeque;
+
+	}
+
+
+	BigInteger counter = 0;
+	std::deque<char> tempDeque;
+	std::string tempBigIntStr;
+	char product = 0;
+	char carry = 0;
+	*this = 0;
+
+	std::deque<char>::const_reverse_iterator firstNumberPtr = firstNumber.crbegin();
+	std::deque<char>::const_reverse_iterator secondNumberPtr = secondNumber.crbegin();
+	while (secondNumberPtr != secondNumber.crend())
+	{
+
+		tempDeque.clear();
+		for (BigInteger i = 0; i < counter; i++)
+		{
+
+			tempDeque.push_front(0);
+
+		}
+
+		firstNumberPtr = firstNumber.crbegin();
+		while (firstNumberPtr != firstNumber.crend())
+		{
+
+
+			product = *secondNumberPtr * *firstNumberPtr + carry;
+			tempDeque.push_front(product % 10);
+			carry = product / 10;
+
+			firstNumberPtr++;
+
+		}
+
+		if (carry != 0)
+		{
+
+			tempDeque.push_front(carry);
+			carry = 0;
+
+		}
+
+		CleanUpNumber(tempDeque);
+		ConvertBigIntegerToString(tempBigIntStr, tempDeque, true);
+
+		*this += tempBigIntStr;
+		counter++;
+		secondNumberPtr++;
+
+	}
+
+	if (secondNumberPositive != firstNumberPositive)
+	{
+
+		positive = false;
+
+	}
+	else
+	{
+
+		positive = true;
+
+	}
+
+	/** Remove the leading zero if there are any. */
+	CleanUpNumber(integer);
+
+	/** Update the stored string */
+	ConvertBigIntegerToString(strInteger, integer, positive);
 
 }
 
