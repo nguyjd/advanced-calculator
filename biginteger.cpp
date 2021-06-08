@@ -739,6 +739,15 @@ BigInteger BigInteger::operator-(const BigInteger& num)
 	return Sub(num);
 }
 
+BigInteger BigInteger::operator*(const BigInteger& num)
+{
+
+	// TODO: REDO THE TEMP SOLUTION
+	BigInteger tempBigInt(*this);
+	tempBigInt.LongMultiplicationToThis(num.strInteger);
+	return tempBigInt;
+}
+
 BigInteger& BigInteger::operator++()
 {
 

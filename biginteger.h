@@ -114,6 +114,9 @@ public:
 	 */
 	BigInteger operator-(const BigInteger& num);
 
+	// TODO: COMMENT THIS
+	BigInteger operator*(const BigInteger& num);
+
 	/** A overloaded increment operator */
 	BigInteger& operator++();
 	BigInteger operator++(int);
