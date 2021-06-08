@@ -8,6 +8,77 @@ Testing::Testing()
 
 }
 
+void Testing::TestingBigIntLongMultiplication(int trialsCount, bool stopOnFail)
+{
+
+	std::string x;
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<int> distrib(INT_MIN, INT_MAX);
+	passCount = 0;
+	trialCount = 0;
+
+	std::cout << "---------------------TESTING BIG INTEGER LongMultiplicationToThis()----------------------" << std::endl;
+	std::cout << "Enter any character into the console to continue." << std::endl;
+	std::cin >> x;
+
+	for (int i = 0; i < trialsCount; i++)
+	{
+		BigInteger temp;
+		int randNum1 = distrib(gen);
+		int randNum2 = distrib(gen);
+
+		trialCount++;
+
+		long long int correctAns = static_cast<long long int>(randNum1) * static_cast<long long int>(randNum2);
+
+		a = randNum1;
+
+		a.LongMultiplicationToThis(std::to_string(randNum2));
+
+		std::cout << std::endl;
+		std::cout << std::endl;
+		std::cout << "Trial " << trialCount << ": " << std::endl;
+		std::cout << randNum1 << " * " << randNum2 << std::endl;
+		std::cout << "Correct Answer: " << correctAns << std::endl;
+		std::cout << "Computed Answer: " << a << std::endl;
+
+		if (a == correctAns)
+		{
+
+			std::cout << "PASSED" << std::endl;
+			passCount++;
+
+		}
+		else
+		{
+
+			std::cout << "FAILED" << std::endl;
+			if (stopOnFail)
+			{
+
+				break;
+
+			}
+
+		}
+
+	}
+
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+	std::cout << "Test Results: " << std::endl;
+	std::cout << "Passed: " << passCount << std::endl;
+	std::cout << "Trials: " << trialCount << std::endl;
+
+	std::cout << "---------------------TESTING COMPLETED----------------------" << std::endl;
+	std::cout << "Enter any character into the console to continue." << std::endl;
+
+	std::cin >> x;
+
+}
+
 void Testing::TestingBigIntGreaterThanOrEqualComparisonOperator(int trialsCount, bool stopOnFail)
 {
 
@@ -853,24 +924,18 @@ void Testing::TestingBigIntAssignmentOperator(int trialsCount, bool stopOnFail)
 	{
 
 		int randNum1 = distrib(gen);
-		int randNum2 = distrib(gen);
 
 		trialCount++;
 
-		std::string correctStr = std::to_string(randNum1);
-		std::string randNum1Str = std::to_string(randNum1);
-
-		a.SetInteger(randNum1);
-		BigInteger temp = a;
-		std::string ans = temp.GetInteger();
+		a = randNum1;
 
 		std::cout << std::endl;
 		std::cout << std::endl;
 		std::cout << "Trial " << trialCount << ": " << std::endl;
-		std::cout << "Correct Answer: " << correctStr << std::endl;
-		std::cout << "Computed Answer: " << ans << std::endl;
+		std::cout << "Correct Answer: " << randNum1 << std::endl;
+		std::cout << "Computed Answer: " << a << std::endl;
 
-		if (ans == correctStr && a.GetInteger() == randNum1Str)
+		if (a == randNum1)
 		{
 
 			std::cout << "PASSED" << std::endl;

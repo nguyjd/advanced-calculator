@@ -7,6 +7,8 @@ int main()
 
 	//test.TestingBigIntSub(1000, false);
 
+	//test.TestingBigIntAssignmentOperator(10000, true);
+
 	//test.TestingBigIntAdditionOperator(100000, true);
 	//test.TestingBigIntSubtractionOperator(100000, true);
 	//test.TestingBigIntPrefixIncrementOperator(10000, true);
@@ -23,10 +25,11 @@ int main()
 	//test.TestingBigIntGreaterThanComparisonOperator(500000, false);
 	//test.TestingBigIntLessThanOrEqualComparisonOperator(100000, false);
 	//test.TestingBigIntGreaterThanOrEqualComparisonOperator(100000, false);
+	test.TestingBigIntLongMultiplication(100000, true);
 	
 	
 	
-	a.SetInteger("99");
+	a.SetInteger("0");
 
 	BigInteger c;
 
@@ -36,7 +39,7 @@ int main()
 
 	BigInteger d(80);
 
-	std::cout << d << std::endl;
+	//std::cout << d << std::endl;
 
 	c.AddToThis('1');
 
@@ -48,11 +51,11 @@ int main()
 
 	//a.SubToThis(b);
 
-	std::cin >> a;
+	a.LongMultiplicationToThis("99");
 
 	std::cout << a << std::endl;
-	std::cout << c << std::endl;
-	std::cout << d << std::endl;
+	//std::cout << c << std::endl;
+	//std::cout << d << std::endl;
 
 	
 
