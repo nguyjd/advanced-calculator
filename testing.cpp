@@ -8,6 +8,541 @@ Testing::Testing()
 
 }
 
+void Testing::TestingBigIntGreaterThanOrEqualComparisonOperator(int trialsCount, bool stopOnFail)
+{
+
+	std::string x;
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<int> distrib(INT_MIN / 2, INT_MAX / 2);
+	passCount = 0;
+	trialCount = 0;
+
+	std::cout << "---------------------TESTING BIG INTEGER operator>=()----------------------" << std::endl;
+	std::cout << "Enter any character into the console to continue." << std::endl;
+	std::cin >> x;
+
+	for (int i = 0; i < trialsCount; i++)
+	{
+
+		int randNum1 = distrib(gen);
+		int randNum2 = distrib(gen);
+
+		trialCount++;
+
+		a = randNum1;
+		b = randNum2;
+
+		std::cout << std::endl;
+		std::cout << std::endl;
+		std::cout << "Trial " << trialCount << ": " << std::endl;
+		std::cout << "Comparing Numbers " << randNum1 << " and " << randNum2 << std::endl;
+
+		if ((a >= b) == (randNum1 >= randNum2))
+		{
+
+			std::cout << "PASSED" << std::endl;
+			passCount++;
+
+		}
+		else
+		{
+
+			std::cout << "FAILED" << std::endl;
+			if (stopOnFail)
+			{
+
+				break;
+
+			}
+
+		}
+
+	}
+
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+	std::cout << "Test Results: " << std::endl;
+	std::cout << "Passed: " << passCount << std::endl;
+	std::cout << "Trials: " << trialCount << std::endl;
+
+	std::cout << "---------------------TESTING COMPLETED----------------------" << std::endl;
+	std::cout << "Enter any character into the console to continue." << std::endl;
+
+	std::cin >> x;
+
+}
+
+void Testing::TestingBigIntLessThanOrEqualComparisonOperator(int trialsCount, bool stopOnFail)
+{
+
+	std::string x;
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<int> distrib(INT_MIN / 2, INT_MAX / 2);
+	passCount = 0;
+	trialCount = 0;
+
+	std::cout << "---------------------TESTING BIG INTEGER operator<=()----------------------" << std::endl;
+	std::cout << "Enter any character into the console to continue." << std::endl;
+	std::cin >> x;
+
+	for (int i = 0; i < trialsCount; i++)
+	{
+
+		int randNum1 = distrib(gen);
+		int randNum2 = distrib(gen);
+
+		trialCount++;
+
+		a = randNum1;
+		b = randNum2;
+
+		std::cout << std::endl;
+		std::cout << std::endl;
+		std::cout << "Trial " << trialCount << ": " << std::endl;
+		std::cout << "Comparing Numbers " << randNum1 << " and " << randNum2 << std::endl;
+
+		if ((a <= b) == (randNum1 <= randNum2))
+		{
+
+			std::cout << "PASSED" << std::endl;
+			passCount++;
+
+		}
+		else
+		{
+
+			std::cout << "FAILED" << std::endl;
+			if (stopOnFail)
+			{
+
+				break;
+
+			}
+
+		}
+
+	}
+
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+	std::cout << "Test Results: " << std::endl;
+	std::cout << "Passed: " << passCount << std::endl;
+	std::cout << "Trials: " << trialCount << std::endl;
+
+	std::cout << "---------------------TESTING COMPLETED----------------------" << std::endl;
+	std::cout << "Enter any character into the console to continue." << std::endl;
+
+	std::cin >> x;
+
+}
+
+void Testing::TestingBigIntGreaterThanComparisonOperator(int trialsCount, bool stopOnFail)
+{
+
+	std::string x;
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<int> distrib(INT_MIN / 2, INT_MAX / 2);
+	passCount = 0;
+	trialCount = 0;
+
+	std::cout << "---------------------TESTING BIG INTEGER operator>()----------------------" << std::endl;
+	std::cout << "Enter any character into the console to continue." << std::endl;
+	std::cin >> x;
+
+	for (int i = 0; i < trialsCount; i++)
+	{
+
+		int randNum1 = distrib(gen);
+		int randNum2 = distrib(gen);
+
+		trialCount++;
+
+		a = randNum1;
+		b = randNum2;
+
+		std::cout << std::endl;
+		std::cout << std::endl;
+		std::cout << "Trial " << trialCount << ": " << std::endl;
+		std::cout << "Comparing Numbers " << randNum1 << " and " << randNum2 << std::endl;
+
+		if ((a > b) == (randNum1 > randNum2))
+		{
+
+			std::cout << "PASSED" << std::endl;
+			passCount++;
+
+		}
+		else
+		{
+
+			std::cout << "FAILED" << std::endl;
+			if (stopOnFail)
+			{
+
+				break;
+
+			}
+
+		}
+
+	}
+
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+	std::cout << "Test Results: " << std::endl;
+	std::cout << "Passed: " << passCount << std::endl;
+	std::cout << "Trials: " << trialCount << std::endl;
+
+	std::cout << "---------------------TESTING COMPLETED----------------------" << std::endl;
+	std::cout << "Enter any character into the console to continue." << std::endl;
+
+	std::cin >> x;
+
+}
+
+void Testing::TestingBigIntLessThanComparisonOperator(int trialsCount, bool stopOnFail)
+{
+
+	std::string x;
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<int> distrib(INT_MIN / 2, INT_MAX / 2);
+	passCount = 0;
+	trialCount = 0;
+
+	std::cout << "---------------------TESTING BIG INTEGER operator<()----------------------" << std::endl;
+	std::cout << "Enter any character into the console to continue." << std::endl;
+	std::cin >> x;
+
+	for (int i = 0; i < trialsCount; i++)
+	{
+
+		int randNum1 = distrib(gen);
+		int randNum2 = distrib(gen);
+
+		trialCount++;
+
+		a = randNum1;
+		b = randNum2;
+
+		std::cout << std::endl;
+		std::cout << std::endl;
+		std::cout << "Trial " << trialCount << ": " << std::endl;
+		std::cout << "Comparing Numbers " << randNum1 << " and " << randNum2 << std::endl;
+
+		if ((a < b) == (randNum1 < randNum2))
+		{
+
+			std::cout << "PASSED" << std::endl;
+			passCount++;
+
+		}
+		else
+		{
+
+			std::cout << "FAILED" << std::endl;
+			if (stopOnFail)
+			{
+
+				break;
+
+			}
+
+		}
+
+	}
+
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+	std::cout << "Test Results: " << std::endl;
+	std::cout << "Passed: " << passCount << std::endl;
+	std::cout << "Trials: " << trialCount << std::endl;
+
+	std::cout << "---------------------TESTING COMPLETED----------------------" << std::endl;
+	std::cout << "Enter any character into the console to continue." << std::endl;
+
+	std::cin >> x;
+
+}
+
+void Testing::TestingBigIntNotEqualComparisonOperator(int trialsCount, bool stopOnFail)
+{
+
+	std::string x;
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<int> distrib(INT_MIN / 2, INT_MAX / 2);
+	passCount = 0;
+	trialCount = 0;
+
+	std::cout << "---------------------TESTING BIG INTEGER operator!=()----------------------" << std::endl;
+	std::cout << "Enter any character into the console to continue." << std::endl;
+	std::cin >> x;
+
+	for (int i = 0; i < trialsCount; i++)
+	{
+
+		int randNum1 = distrib(gen);
+		int randNum2 = distrib(gen);
+
+		trialCount++;
+
+		a = randNum1;
+		b = randNum2;
+
+		std::cout << std::endl;
+		std::cout << std::endl;
+		std::cout << "Trial " << trialCount << ": " << std::endl;
+
+		if (a != randNum2)
+		{
+
+			std::cout << "PASSED" << std::endl;
+			passCount++;
+
+		}
+		else
+		{
+
+			std::cout << "FAILED" << std::endl;
+			if (stopOnFail)
+			{
+
+				break;
+
+			}
+
+		}
+
+	}
+
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+	std::cout << "Test Results: " << std::endl;
+	std::cout << "Passed: " << passCount << std::endl;
+	std::cout << "Trials: " << trialCount << std::endl;
+
+	std::cout << "---------------------TESTING COMPLETED----------------------" << std::endl;
+	std::cout << "Enter any character into the console to continue." << std::endl;
+
+	std::cin >> x;
+
+}
+
+void Testing::TestingBigIntEqualComparisonOperator(int trialsCount, bool stopOnFail)
+{
+
+	std::string x;
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<int> distrib(INT_MIN / 2, INT_MAX / 2);
+	passCount = 0;
+	trialCount = 0;
+
+	std::cout << "---------------------TESTING BIG INTEGER operator==()----------------------" << std::endl;
+	std::cout << "Enter any character into the console to continue." << std::endl;
+	std::cin >> x;
+
+	for (int i = 0; i < trialsCount; i++)
+	{
+
+		int randNum1 = distrib(gen);
+
+		trialCount++;
+
+		a = randNum1;
+		b = randNum1;
+
+		std::cout << std::endl;
+		std::cout << std::endl;
+		std::cout << "Trial " << trialCount << ": " << std::endl;
+
+		if (a == randNum1)
+		{
+
+			std::cout << "PASSED" << std::endl;
+			passCount++;
+
+		}
+		else
+		{
+
+			std::cout << "FAILED" << std::endl;
+			if (stopOnFail)
+			{
+
+				break;
+
+			}
+
+		}
+
+	}
+
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+	std::cout << "Test Results: " << std::endl;
+	std::cout << "Passed: " << passCount << std::endl;
+	std::cout << "Trials: " << trialCount << std::endl;
+
+	std::cout << "---------------------TESTING COMPLETED----------------------" << std::endl;
+	std::cout << "Enter any character into the console to continue." << std::endl;
+
+	std::cin >> x;
+
+}
+
+void Testing::TestingBigIntAdditionAssessmentOperator(int trialsCount, bool stopOnFail)
+{
+
+	std::string x;
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<int> distrib(INT_MIN / 2, INT_MAX / 2);
+	passCount = 0;
+	trialCount = 0;
+
+	std::cout << "---------------------TESTING BIG INTEGER operator+=()----------------------" << std::endl;
+	std::cout << "Enter any character into the console to continue." << std::endl;
+	std::cin >> x;
+
+	for (int i = 0; i < trialsCount; i++)
+	{
+
+		int randNum1 = distrib(gen);
+		int randNum2 = distrib(gen);
+
+		trialCount++;
+
+		a = randNum1;
+		std::string correctStr = std::to_string(randNum1 + randNum2);
+
+		a += randNum2;
+		std::string ans = a.GetInteger();
+
+		std::cout << std::endl;
+		std::cout << std::endl;
+		std::cout << "Trial " << trialCount << ": " << std::endl;
+		std::cout << "Correct Answer: " << correctStr << std::endl;
+		std::cout << "Computed Answer: " << ans << std::endl;
+
+		if (ans == correctStr)
+		{
+
+			std::cout << "PASSED" << std::endl;
+			passCount++;
+
+		}
+		else
+		{
+
+			std::cout << "FAILED" << std::endl;
+			if (stopOnFail)
+			{
+
+				break;
+
+			}
+
+		}
+
+	}
+
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+	std::cout << "Test Results: " << std::endl;
+	std::cout << "Passed: " << passCount << std::endl;
+	std::cout << "Trials: " << trialCount << std::endl;
+
+	std::cout << "---------------------TESTING COMPLETED----------------------" << std::endl;
+	std::cout << "Enter any character into the console to continue." << std::endl;
+
+	std::cin >> x;
+
+}
+
+void Testing::TestingBigIntSubtractionAssessmentOperator(int trialsCount, bool stopOnFail)
+{
+
+	std::string x;
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<int> distrib(INT_MIN / 2, INT_MAX / 2);
+	passCount = 0;
+	trialCount = 0;
+
+	std::cout << "---------------------TESTING BIG INTEGER operator-=()----------------------" << std::endl;
+	std::cout << "Enter any character into the console to continue." << std::endl;
+	std::cin >> x;
+
+	for (int i = 0; i < trialsCount; i++)
+	{
+
+		int randNum1 = distrib(gen);
+		int randNum2 = distrib(gen);
+
+		trialCount++;
+
+		a = randNum1;
+		std::string correctStr = std::to_string(randNum1 - randNum2);
+
+
+
+		a -= randNum2;
+		std::string ans = a.GetInteger();
+
+		std::cout << std::endl;
+		std::cout << std::endl;
+		std::cout << "Trial " << trialCount << ": " << std::endl;
+		std::cout << "Correct Answer: " << correctStr << std::endl;
+		std::cout << "Computed Answer: " << ans << std::endl;
+
+		if (ans == correctStr)
+		{
+
+			std::cout << "PASSED" << std::endl;
+			passCount++;
+
+		}
+		else
+		{
+
+			std::cout << "FAILED" << std::endl;
+			if (stopOnFail)
+			{
+
+				break;
+
+			}
+
+		}
+
+	}
+
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+	std::cout << "Test Results: " << std::endl;
+	std::cout << "Passed: " << passCount << std::endl;
+	std::cout << "Trials: " << trialCount << std::endl;
+
+	std::cout << "---------------------TESTING COMPLETED----------------------" << std::endl;
+	std::cout << "Enter any character into the console to continue." << std::endl;
+
+	std::cin >> x;
+
+}
+
 void Testing::TestingBigIntPostfixIncrementOperator(int trialsCount, bool stopOnFail)
 {
 
