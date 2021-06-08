@@ -1,4 +1,4 @@
-# advanced-calculator
+# Advanced Calculator
 
 A calculator that can parse advanced questions/equation and solve it.
 This program is inspired from [Wolfram Alpha](https://www.wolframalpha.com/).
