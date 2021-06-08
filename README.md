@@ -26,7 +26,7 @@ Built on Windows, but works on Linux (Not tested on Mac OS)
 
 # Links
 
-- [Project Board]() 
+- [Project Board](https://github.com/nguyjd/advanced-calculator/projects/1) 
 
 # Legal
 
