@@ -99,11 +99,6 @@ public:
 	 * @return The copied BigInteger
 	 */
 	BigInteger& operator=(BigInteger num);
-	BigInteger& operator=(const std::string num);
-	BigInteger& operator=(const char num);
-	BigInteger& operator=(const int num);
-	BigInteger& operator=(const long num);
-	BigInteger& operator=(const long long num);
 
 	/**
 	 * A overloaded addition operator
@@ -111,11 +106,6 @@ public:
 	 * @return A Biginteger with the value of the addition.
 	 */
 	BigInteger operator+(const BigInteger& num);
-	BigInteger operator+(const std::string& num);
-	BigInteger operator+(const char& num);
-	BigInteger operator+(const int& num);
-	BigInteger operator+(const long& num);
-	BigInteger operator+(const long long& num);
 
 	/**
 	 * A overloaded Subtraction operator
@@ -123,18 +113,34 @@ public:
 	 * @return A Biginteger with the value of the subtraction.
 	 */
 	BigInteger operator-(const BigInteger& num);
-	BigInteger operator-(const std::string& num);
-	BigInteger operator-(const char& num);
-	BigInteger operator-(const int& num);
-	BigInteger operator-(const long& num);
-	BigInteger operator-(const long long& num);
 
+	/** A overloaded increment operator */
+	BigInteger& operator++();
+	BigInteger operator++(int);
 
-	BigInteger& operator++();      // Prefix increment
-	BigInteger operator++(int); // Postfix increment
+	/** A overloaded decrement operator */
+	BigInteger& operator--();
+	BigInteger operator--(int);
 
-	BigInteger& operator--();      // Prefix decrement
-	BigInteger operator--(int); // Postfix decrement
+	// Remaining operators *, /, %, *=, /=, %=
+
+	/** A overloaded addition and subtraction operator */
+	BigInteger& operator+=(const BigInteger& num);
+	BigInteger& operator-=(const BigInteger& num);
+
+	/** All the comparison operators */
+	bool operator==(const BigInteger& num);
+	bool operator!=(const BigInteger& num);
+	bool operator<(const BigInteger& num);
+	bool operator>(const BigInteger& num);
+	bool operator>=(const BigInteger& num);
+	bool operator<=(const BigInteger& num);
+
+protected:
+
+	friend std::ostream& operator<<(std::ostream& output, const BigInteger& num);
+
+	friend std::istream& operator>>(std::istream& input, BigInteger& num);
 
 private:
 

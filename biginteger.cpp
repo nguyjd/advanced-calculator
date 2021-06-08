@@ -101,6 +101,7 @@ bool BigInteger::SetInteger(const std::string number)
 		/** Sets all the values to store it within the object */
 		strInteger = number;
 		ConvertStringToBigInteger(strInteger, integer, positive);
+		CleanUpNumber(integer);
 		return true;
 
 	}
@@ -726,75 +727,6 @@ BigInteger& BigInteger::operator=(BigInteger num)
 
 }
 
-BigInteger& BigInteger::operator=(const std::string num)
-{
-	
-	BigInteger temp(num);
-	
-	std::swap(validNumber, temp.validNumber);
-	std::swap(positive, temp.positive);
-	std::swap(strInteger, temp.strInteger);
-	std::swap(integer, temp.integer);
-
-	return *this;
-}
-
-BigInteger& BigInteger::operator=(const char num)
-{
-
-	BigInteger temp(num);
-
-	std::swap(validNumber, temp.validNumber);
-	std::swap(positive, temp.positive);
-	std::swap(strInteger, temp.strInteger);
-	std::swap(integer, temp.integer);
-
-	return *this;
-
-}
-
-BigInteger& BigInteger::operator=(const int num)
-{
-
-	BigInteger temp(num);
-
-	std::swap(validNumber, temp.validNumber);
-	std::swap(positive, temp.positive);
-	std::swap(strInteger, temp.strInteger);
-	std::swap(integer, temp.integer);
-
-	return *this;
-
-}
-
-BigInteger& BigInteger::operator=(const long num)
-{
-
-	BigInteger temp(num);
-
-	std::swap(validNumber, temp.validNumber);
-	std::swap(positive, temp.positive);
-	std::swap(strInteger, temp.strInteger);
-	std::swap(integer, temp.integer);
-
-	return *this;
-
-}
-
-BigInteger& BigInteger::operator=(const long long num)
-{
-
-	BigInteger temp(num);
-
-	std::swap(validNumber, temp.validNumber);
-	std::swap(positive, temp.positive);
-	std::swap(strInteger, temp.strInteger);
-	std::swap(integer, temp.integer);
-
-	return *this;
-
-}
-
 BigInteger BigInteger::operator+(const BigInteger& num)
 {
 
@@ -802,59 +734,7 @@ BigInteger BigInteger::operator+(const BigInteger& num)
 
 }
 
-BigInteger BigInteger::operator+(const std::string& num)
-{
-
-	return Add(num);
-
-}
-
-BigInteger BigInteger::operator+(const char& num)
-{
-	return Add(num);
-}
-
-BigInteger BigInteger::operator+(const int& num)
-{
-	return Add(num);
-}
-
-BigInteger BigInteger::operator+(const long& num)
-{
-	return Add(num);
-}
-
-BigInteger BigInteger::operator+(const long long& num)
-{
-	return Add(num);
-}
-
 BigInteger BigInteger::operator-(const BigInteger& num)
-{
-	return Sub(num);
-}
-
-BigInteger BigInteger::operator-(const std::string& num)
-{
-	return Sub(num);
-}
-
-BigInteger BigInteger::operator-(const char& num)
-{
-	return Sub(num);
-}
-
-BigInteger BigInteger::operator-(const int& num)
-{
-	return Sub(num);
-}
-
-BigInteger BigInteger::operator-(const long& num)
-{
-	return Sub(num);
-}
-
-BigInteger BigInteger::operator-(const long long& num)
 {
 	return Sub(num);
 }
@@ -892,6 +772,140 @@ BigInteger BigInteger::operator--(int)
 	--* this;
 
 	return temp;
+
+}
+
+BigInteger& BigInteger::operator+=(const BigInteger& rhs)
+{
+	
+	AddToThis(rhs);
+
+	return *this;
+
+}
+
+BigInteger& BigInteger::operator-=(const BigInteger& rhs)
+{
+	
+	SubToThis(rhs);
+
+	return *this;
+
+}
+
+bool BigInteger::operator==(const BigInteger& num)
+{
+
+	return this->integer == num.integer && this->strInteger == num.strInteger 
+		&& this->positive == num.positive && this->validNumber == num.validNumber;
+
+}
+
+bool BigInteger::operator!=(const BigInteger& num)
+{
+	return !(*this == num);
+}
+
+bool BigInteger::operator<(const BigInteger& num)
+{
+
+	bool lhsPositive = this->positive;
+	bool rhsPositive = num.positive;
+	std::deque<char> lhsNum = this->integer;
+	std::deque<char> rhsNum = num.integer;
+
+	if (lhsNum.size() < rhsNum.size())
+	{
+
+		if (!rhsPositive)
+		{
+
+			return false;
+
+		}
+
+		return true;
+
+	}
+	/** This will check step by step each number to find the larger number. */
+	else if (lhsNum.size() == rhsNum.size())
+	{
+
+		/** look at the number at the front to determine the larger number. */
+		std::deque<char>::const_iterator lhsNumPtr = lhsNum.cbegin();
+		std::deque<char>::const_iterator rhsNumPtr = rhsNum.cbegin();
+
+		while (lhsNumPtr != lhsNum.cend())
+		{
+
+			/** The second array is the larger number. */
+			if (*lhsNumPtr < *rhsNumPtr)
+			{
+
+				if (rhsPositive)
+				{
+
+					return true;
+
+				}
+
+				return false;
+				
+
+			}
+			/** The first array is already the larger number. */
+			else if (*lhsNumPtr > *rhsNumPtr)
+			{
+
+				if (!lhsPositive)
+				{
+
+					return true;
+
+				}
+
+				return false;
+
+			}
+
+			/** Increment the Iterator */
+			lhsNumPtr++;
+			rhsNumPtr++;
+
+		}
+
+		return false;
+
+	}
+
+	if (!lhsPositive)
+	{
+
+		return true;
+
+	}
+
+	return false;
+}
+
+bool BigInteger::operator>(const BigInteger& num)
+{
+
+	return !(*this < num) && *this != num;
+
+}
+
+bool BigInteger::operator>=(const BigInteger& num)
+{
+
+	return *this > num || *this == num;
+
+}
+
+bool BigInteger::operator<=(const BigInteger& num)
+{
+
+	return *this < num || *this == num;
 
 }
 
@@ -1026,5 +1040,28 @@ void BigInteger::CleanUpNumber(std::deque<char>& numVec)
 		}
 
 	}
+
+	/** Update the string. */
+	ConvertBigIntegerToString(strInteger, integer);
+
+}
+
+std::ostream& operator<<(std::ostream& output, const BigInteger& num)
+{
+	
+	output << num.strInteger;
+
+	return output;
+
+}
+
+std::istream& operator>>(std::istream& input, BigInteger& num)
+{
+
+	std::string inputString;
+	input >> inputString;
+
+	num.SetInteger(inputString);
+	return input;
 
 }
