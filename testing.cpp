@@ -14,7 +14,7 @@ void Testing::TestingBigIntMathTiming(int trialsCount)
 	std::string x;
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_int_distribution<int> distrib(INT_MIN, INT_MAX);
+	std::uniform_int_distribution<long long int> distrib(LLONG_MIN, LLONG_MAX);
 	passCount = 0;
 	trialCount = 0;
 
@@ -42,8 +42,8 @@ void Testing::TestingBigIntMathTiming(int trialsCount)
 	for (int i = 0; i < trialsCount; i++)
 	{
 		
-		int randNum1 = distrib(gen);
-		int randNum2 = distrib(gen);
+		long long int randNum1 = distrib(gen);
+		long long int randNum2 = distrib(gen);
 		std::string randNum2Str = std::to_string(randNum2);
 
 		trialCount++;
