@@ -43,9 +43,32 @@ int main()
 	//test.TestingBigIntGreaterThanComparisonOperator(500000, false);
 	//test.TestingBigIntLessThanOrEqualComparisonOperator(100000, false);
 	//test.TestingBigIntGreaterThanOrEqualComparisonOperator(100000, false);
-	//test.TestingBigIntLongMultiplication(100000, true);
-	test.TestingBigIntMathTiming(10000);
+	test.TestingBigIntMultiplication(10000, true);
+	test.TestingBigIntMathTiming(10);
 	
+	std::string x = "1111";
+	std::string y = "20";
+
+	BigInteger test35 = x;
+
+	std::cout << x << std::endl;
+
+	test35.MultiplyToThis(y);
+
+	std::cout << test35 << std::endl;
+
+	long long int stringSplitPoint = 2;
+
+	if (x[0] == '-')
+	{
+
+		x = x.substr(1);
+
+	}
+
+	std::cout << x.substr(stringSplitPoint, -stringSplitPoint) << std::endl;
+	std::cout << x.substr(stringSplitPoint) << std::endl;
+
 	const int numFact = 500;
 	BigInteger fact = FindFactorial(numFact);
 	
@@ -74,7 +97,7 @@ int main()
 
 	//a.SubToThis(b);
 
-	a.LongMultiplicationToThis("99");
+	//a.LongMultiplicationToThis("99");
 
 	//std::cout << a << std::endl;
 	//std::cout << fact << std::endl;

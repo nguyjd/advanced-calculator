@@ -17,7 +17,7 @@ public:
 
 	void TestingBigIntMathTiming(int trialsCount);
 
-	void TestingBigIntLongMultiplication(int trialsCount, bool stopOnFail);
+	void TestingBigIntMultiplication(int trialsCount, bool stopOnFail);
 
 	void TestingBigIntGreaterThanOrEqualComparisonOperator(int trialsCount, bool stopOnFail);
 	void TestingBigIntLessThanOrEqualComparisonOperator(int trialsCount, bool stopOnFail);

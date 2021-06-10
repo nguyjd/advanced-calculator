@@ -61,7 +61,7 @@ void Testing::TestingBigIntMathTiming(int trialsCount)
 		auto subStopTime = std::chrono::steady_clock::now();
 
 		auto multiStartTime = std::chrono::steady_clock::now();
-		multi.LongMultiplicationToThis(randNum2Str);
+		multi.MultiplyToThis(randNum2Str);
 		auto multiStopTime = std::chrono::steady_clock::now();
 
 		addTotalTime += std::chrono::duration_cast<std::chrono::microseconds>(addStopTime - addStartTime);
@@ -95,7 +95,7 @@ void Testing::TestingBigIntMathTiming(int trialsCount)
 
 }
 
-void Testing::TestingBigIntLongMultiplication(int trialsCount, bool stopOnFail)
+void Testing::TestingBigIntMultiplication(int trialsCount, bool stopOnFail)
 {
 
 	std::string x;
@@ -105,7 +105,7 @@ void Testing::TestingBigIntLongMultiplication(int trialsCount, bool stopOnFail)
 	passCount = 0;
 	trialCount = 0;
 
-	std::cout << "---------------------TESTING BIG INTEGER LongMultiplicationToThis()----------------------" << std::endl;
+	std::cout << "---------------------TESTING BIG INTEGER MultiplyToThis()----------------------" << std::endl;
 	std::cout << "Enter any character into the console to continue." << std::endl;
 	std::cin >> x;
 
@@ -121,7 +121,7 @@ void Testing::TestingBigIntLongMultiplication(int trialsCount, bool stopOnFail)
 
 		a = randNum1;
 
-		a.LongMultiplicationToThis(std::to_string(randNum2));
+		a.MultiplyToThis(std::to_string(randNum2));
 
 		std::cout << std::endl;
 		std::cout << std::endl;
