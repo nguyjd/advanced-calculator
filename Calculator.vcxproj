@@ -140,13 +140,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="biginteger.cpp" />
-    <ClCompile Include="Karatsuba.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="testing.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="biginteger.h" />
-    <ClInclude Include="Karatsuba.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="testing.h" />
   </ItemGroup>
