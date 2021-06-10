@@ -93,6 +93,8 @@ public:
 	BigInteger Sub(long number);
 	BigInteger Sub(long long number);
 
+	void MultiplyToThis(std::string number);
+
 	/**
 	 * A overloaded assignment operator using the copy and swap idiom
 	 * @param num - The BigInteger that is being assigned to the BigInteger left of the equal sign.
@@ -139,8 +141,6 @@ public:
 	bool operator>=(const BigInteger& num);
 	bool operator<=(const BigInteger& num);
 
-	void LongMultiplicationToThis(const std::string number);
-
 protected:
 
 	friend std::ostream& operator<<(std::ostream& output, const BigInteger& num);
@@ -172,8 +172,11 @@ private:
 
 	/** Removes leading zero from the number. */
 	void CleanUpNumber(std::deque<char>& numVec);
-
 	
+
+	void LongMultiplicationToThis(const std::string number);
+
+	BigInteger KaratsubaAlgorithm(const std::string x, const std::string y);
 
 private:
 

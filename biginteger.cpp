@@ -715,6 +715,17 @@ BigInteger BigInteger::Sub(long long number)
 
 }
 
+void BigInteger::MultiplyToThis(std::string number)
+{
+
+	// TODO: ADD LOGIC TO CHOOSE ALGORITHM
+
+
+	*this = KaratsubaAlgorithm(strInteger, number);
+
+
+}
+
 BigInteger& BigInteger::operator=(BigInteger num)
 {
 
@@ -1024,6 +1035,9 @@ void BigInteger::ConvertBigIntegerToString(std::string& numStr, const std::deque
 void BigInteger::CleanUpNumber(std::deque<char>& numVec)
 {
 
+	/** Check if the deque is valid */
+	if (numVec.empty()) { return; }
+
 	/** Get the beginning of the deque */
 	std::deque<char>::iterator numIt = numVec.begin();
 
@@ -1112,7 +1126,6 @@ void BigInteger::LongMultiplicationToThis(const std::string number)
 		while (firstNumberPtr != firstNumber.crend())
 		{
 
-
 			product = *secondNumberPtr * *firstNumberPtr + carry;
 			tempDeque.push_front(product % 10);
 			carry = product / 10;
@@ -1157,6 +1170,159 @@ void BigInteger::LongMultiplicationToThis(const std::string number)
 	/** Update the stored string */
 	ConvertBigIntegerToString(strInteger, integer, positive);
 
+}
+
+BigInteger BigInteger::KaratsubaAlgorithm(std::string x, std::string y)
+{
+
+	bool firstNumberPositive = true;
+	bool secondNumberPositive = true;
+
+	// Remove the negitive sign
+	if (x[0] == '-')
+	{
+
+		firstNumberPositive = false;
+		x = x.substr(1);
+
+	}
+
+	if (y[0] == '-')
+	{
+
+		secondNumberPositive = false;
+		y = y.substr(1);
+
+	}
+
+	// Finds the amount of digits in each number.
+	long long int xDigitCount = x.length();
+	long long int yDigitCount = y.length();
+
+	// Find the largest amount of digits.
+	long long int largestDigitCount;
+	if (xDigitCount > yDigitCount)
+	{
+
+		largestDigitCount = xDigitCount;
+
+	}
+	else
+	{
+
+		largestDigitCount = yDigitCount;
+
+	}
+
+	// Base Case
+	if (largestDigitCount <= 1)
+	{
+
+		int temp = (x[0] - ASCIIOFFSET) * (y[0] - ASCIIOFFSET);
+
+		return temp;
+
+	}
+
+	long long int stringSplitPoint = largestDigitCount / 2;
+
+	std::string powerOfTenN = "1";
+	for (long long int i = 0; i < stringSplitPoint * 2; i++)
+	{
+
+		powerOfTenN += "0";
+
+	}
+
+	std::string powerOfTenN2 = "1";
+	for (long long int i = 0; i < stringSplitPoint; i++)
+	{
+
+		powerOfTenN2 += "0";
+
+	}
+
+	// Split the number.
+	std::string a = "", b = "", c = "", d = "";
+	if (xDigitCount - stringSplitPoint >= 0) 
+	{ 
+	
+		a = x.substr(0, xDigitCount - stringSplitPoint); 
+		b = x.substr(xDigitCount - stringSplitPoint);
+
+	}
+	else
+	{
+
+		b = x;
+
+	}
+	
+	
+	if (yDigitCount - stringSplitPoint >= 0) 
+	{ 
+		
+		c = y.substr(0, yDigitCount - stringSplitPoint); 
+		d = y.substr(yDigitCount - stringSplitPoint);
+
+	}
+	else
+	{
+
+		d = y;
+
+	}
+	
+
+	// Check for empty strings
+	if (a == "") { a = "0"; }
+	if (b == "") { b = "0"; }
+	if (c == "") { c = "0"; }
+	if (d == "") { d = "0"; }
+
+	// A * C
+	BigInteger AandC = KaratsubaAlgorithm(a, c);
+	
+	// B * D
+	BigInteger BandD = KaratsubaAlgorithm(b, d);
+	
+	BigInteger AB = a;
+	AB.AddToThis(b);
+
+	BigInteger CD = c;
+	CD.AddToThis(d);
+	// (a + b) * (c + d)
+	BigInteger ABandCD = KaratsubaAlgorithm(AB.GetInteger(), CD.GetInteger());
+
+	// (a + b) * (c + d) - (A * C) - (B * D)
+	BigInteger ADandBC = ABandCD - AandC - BandD;
+
+	AandC.LongMultiplicationToThis(powerOfTenN);
+	ADandBC.LongMultiplicationToThis(powerOfTenN2);
+
+	BigInteger returnInt = AandC + ADandBC + BandD;
+	if (secondNumberPositive != firstNumberPositive)
+	{
+
+		returnInt.positive = false;
+
+	}
+	else
+	{
+
+		returnInt.positive = true;
+
+	}
+
+	/** Remove the leading zero if there are any. */
+	returnInt.CleanUpNumber(returnInt.integer);
+
+	/** Update the stored string */
+	returnInt.ConvertBigIntegerToString(returnInt.strInteger, returnInt.integer, returnInt.positive);
+
+	// (A * C) * 10^N + (A + D)*(B + C) * 10^(N/2) + (B * D) 
+	return returnInt;
+	
 }
 
 std::ostream& operator<<(std::ostream& output, const BigInteger& num)
