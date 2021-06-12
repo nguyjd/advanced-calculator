@@ -22,30 +22,30 @@ int main()
 {
 
 	
-	test.TestingBigIntAdd(1000, true);
+	//test.TestingBigIntAdd(1000, true);
 
-	test.TestingBigIntSub(1000, false);
+	//test.TestingBigIntSub(1000, false);
 
-	test.TestingBigIntAssignmentOperator(1000, false);
+	//test.TestingBigIntAssignmentOperator(1000, false);
 
-	test.TestingBigIntAdditionOperator(1000, false);
-	test.TestingBigIntSubtractionOperator(1000, false);
-	test.TestingBigIntPrefixIncrementOperator(1000, false);
-	test.TestingBigIntPostfixIncrementOperator(1000, false);
-	test.TestingBigIntPrefixDecrementOperator(1000, false);
-	test.TestingBigIntPostfixDecrementOperator(1000, false);
+	//test.TestingBigIntAdditionOperator(1000, false);
+	//test.TestingBigIntSubtractionOperator(1000, false);
+	//test.TestingBigIntPrefixIncrementOperator(1000, false);
+	//test.TestingBigIntPostfixIncrementOperator(1000, false);
+	//test.TestingBigIntPrefixDecrementOperator(1000, false);
+	//test.TestingBigIntPostfixDecrementOperator(1000, false);
 
-	test.TestingBigIntAdditionAssessmentOperator(1000, false);
-	test.TestingBigIntSubtractionAssessmentOperator(1000, false);
-	test.TestingBigIntEqualComparisonOperator(1000, false);
-	test.TestingBigIntNotEqualComparisonOperator(1000, false);
+	//test.TestingBigIntAdditionAssessmentOperator(1000, false);
+	//test.TestingBigIntSubtractionAssessmentOperator(1000, false);
+	//test.TestingBigIntEqualComparisonOperator(1000, false);
+	//test.TestingBigIntNotEqualComparisonOperator(1000, false);
 
-	test.TestingBigIntLessThanComparisonOperator(1000, false);
-	test.TestingBigIntGreaterThanComparisonOperator(1000, false);
-	test.TestingBigIntLessThanOrEqualComparisonOperator(1000, false);
-	test.TestingBigIntGreaterThanOrEqualComparisonOperator(1000, false);
+	//test.TestingBigIntLessThanComparisonOperator(1000, false);
+	//test.TestingBigIntGreaterThanComparisonOperator(1000, false);
+	//test.TestingBigIntLessThanOrEqualComparisonOperator(1000, false);
+	//test.TestingBigIntGreaterThanOrEqualComparisonOperator(1000, false);
 	
-	test.TestingBigIntMultiplication(10000, false);
+	test.TestingBigIntMultiplication(1000, false);
 	test.TestingBigIntMathTiming(200);
 
 	const int numFact = 100;
