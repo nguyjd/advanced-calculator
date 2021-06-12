@@ -1035,11 +1035,53 @@ void BigInteger::CleanUpNumber(std::deque<char>& numVec)
 
 }
 
+BigInteger BigInteger::LongMultiplyThread(std::deque<char> firstNum, char digit, long long int place)
+{
+	
+	BigInteger returnInt;
+	std::string tempBigIntStr;
+	char product = 0;
+	char carry = 0;
+	
+	std::deque<char>::const_reverse_iterator firstNumberPtr = firstNum.crbegin();
+	
+	for (long long int i = 0; i < place; i++)
+	{
+
+		returnInt.integer.push_front(0);
+
+	}
+	
+	while (firstNumberPtr != firstNum.crend())
+	{
+
+		product = digit * *firstNumberPtr + carry;
+		returnInt.integer.push_front(product % 10);
+		carry = product / 10;
+
+		firstNumberPtr++;
+
+	}
+
+	if (carry != 0)
+	{
+
+		returnInt.integer.push_front(carry);
+		carry = 0;
+
+	}
+
+
+	ConvertBigIntegerToString(returnInt.strInteger, returnInt.integer, returnInt.positive);
+	returnInt.validNumber = returnInt.VerifyNumber(returnInt.strInteger);
+
+	return returnInt;
+}
+
 void BigInteger::MultiplyToThis(const std::string number)
 {
 
 	/** The local arrays used for computation */
-	std::deque<char> firstNumber = integer;
 	std::deque<char> secondNumber;
 	bool firstNumberPositive = positive;
 	bool secondNumberPositive = true;
@@ -1057,63 +1099,44 @@ void BigInteger::MultiplyToThis(const std::string number)
 	ConvertStringToBigInteger(number, secondNumber, secondNumberPositive);
 
 	/** This will set the first number to the largest number. */
-	if (firstNumber.size() < secondNumber.size())
+	if (integer.size() < secondNumber.size())
 	{
 
 		/** Swap the numbers. */
 		std::deque<char> tempDeque = secondNumber;
-		secondNumber = firstNumber;
-		firstNumber = tempDeque;
+		secondNumber = integer;
+		integer = tempDeque;
 
 	}
 
 
-	BigInteger counter = 0;
-	std::deque<char> tempDeque;
-	std::string tempBigIntStr;
-	char product = 0;
-	char carry = 0;
-	*this = 0;
-
-	std::deque<char>::const_reverse_iterator firstNumberPtr = firstNumber.crbegin();
+	long long int counter = 0;
+	std::deque<std::future<BigInteger>> threads;
 	std::deque<char>::const_reverse_iterator secondNumberPtr = secondNumber.crbegin();
 	while (secondNumberPtr != secondNumber.crend())
 	{
 
-		tempDeque.clear();
-		for (BigInteger i = 0; i < counter; i++)
+		if (*secondNumberPtr == 0)
 		{
 
-			tempDeque.push_front(0);
+			counter++;
+			secondNumberPtr++;
+			continue;
 
 		}
+		
+		threads.push_back(std::async(std::launch::async, &BigInteger::LongMultiplyThread, this, integer, *secondNumberPtr, counter));
 
-		firstNumberPtr = firstNumber.crbegin();
-		while (firstNumberPtr != firstNumber.crend())
-		{
-
-			product = *secondNumberPtr * *firstNumberPtr + carry;
-			tempDeque.push_front(product % 10);
-			carry = product / 10;
-
-			firstNumberPtr++;
-
-		}
-
-		if (carry != 0)
-		{
-
-			tempDeque.push_front(carry);
-			carry = 0;
-
-		}
-
-		CleanUpNumber(tempDeque);
-		ConvertBigIntegerToString(tempBigIntStr, tempDeque, true);
-
-		*this += tempBigIntStr;
 		counter++;
 		secondNumberPtr++;
+
+	}
+
+	*this = 0;
+	for (auto& thread : threads)
+	{
+			
+		*this += thread.get();
 
 	}
 

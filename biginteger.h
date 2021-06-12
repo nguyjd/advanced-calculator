@@ -3,6 +3,9 @@
 #include <deque>
 #include <iostream>
 #include <iterator>
+#include <future>
+#include <vector>
+#include <chrono>
 
 /** The offset from the character 0 */
 #define ASCIIOFFSET 48
@@ -169,6 +172,8 @@ private:
 
 	/** Removes leading zero from the number. */
 	void CleanUpNumber(std::deque<char>& numVec);
+
+	BigInteger LongMultiplyThread(std::deque<char> firstNum, char digit, long long int place);
 
 private:
 
