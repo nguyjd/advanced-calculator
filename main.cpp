@@ -21,59 +21,37 @@ BigInteger FindFactorial(const int n)
 int main()
 {
 
-	//test.TestingBigIntAdd(1000, false);
-
-	//test.TestingBigIntSub(1000, false);
-
-	//test.TestingBigIntAssignmentOperator(10000, true);
-
-	//test.TestingBigIntAdditionOperator(100000, true);
-	//test.TestingBigIntSubtractionOperator(100000, true);
-	//test.TestingBigIntPrefixIncrementOperator(10000, true);
-	//test.TestingBigIntPostfixIncrementOperator(10000, true);
-	//test.TestingBigIntPrefixDecrementOperator(10000, true);
-	//test.TestingBigIntPostfixDecrementOperator(10000, true);
-
-	//test.TestingBigIntAdditionAssessmentOperator(10000, true);
-	//test.TestingBigIntSubtractionAssessmentOperator(10000, true);
-	//test.TestingBigIntEqualComparisonOperator(10000, true);
-	//test.TestingBigIntNotEqualComparisonOperator(10000, true);
-
-	//test.TestingBigIntLessThanComparisonOperator(500000, false);
-	//test.TestingBigIntGreaterThanComparisonOperator(500000, false);
-	//test.TestingBigIntLessThanOrEqualComparisonOperator(100000, false);
-	//test.TestingBigIntGreaterThanOrEqualComparisonOperator(100000, false);
-	test.TestingBigIntMultiplication(10000, true);
-	test.TestingBigIntMathTiming(10);
 	
-	std::string x = "1111";
-	std::string y = "20";
+	test.TestingBigIntAdd(1000, true);
 
-	BigInteger test35 = x;
+	test.TestingBigIntSub(1000, false);
 
-	std::cout << x << std::endl;
+	test.TestingBigIntAssignmentOperator(1000, false);
 
-	test35.MultiplyToThis(y);
+	test.TestingBigIntAdditionOperator(1000, false);
+	test.TestingBigIntSubtractionOperator(1000, false);
+	test.TestingBigIntPrefixIncrementOperator(1000, false);
+	test.TestingBigIntPostfixIncrementOperator(1000, false);
+	test.TestingBigIntPrefixDecrementOperator(1000, false);
+	test.TestingBigIntPostfixDecrementOperator(1000, false);
 
-	std::cout << test35 << std::endl;
+	test.TestingBigIntAdditionAssessmentOperator(1000, false);
+	test.TestingBigIntSubtractionAssessmentOperator(1000, false);
+	test.TestingBigIntEqualComparisonOperator(1000, false);
+	test.TestingBigIntNotEqualComparisonOperator(1000, false);
 
-	long long int stringSplitPoint = 2;
+	test.TestingBigIntLessThanComparisonOperator(1000, false);
+	test.TestingBigIntGreaterThanComparisonOperator(1000, false);
+	test.TestingBigIntLessThanOrEqualComparisonOperator(1000, false);
+	test.TestingBigIntGreaterThanOrEqualComparisonOperator(1000, false);
+	
+	test.TestingBigIntMultiplication(10000, false);
+	test.TestingBigIntMathTiming(200);
 
-	if (x[0] == '-')
-	{
-
-		x = x.substr(1);
-
-	}
-
-	std::cout << x.substr(stringSplitPoint, -stringSplitPoint) << std::endl;
-	std::cout << x.substr(stringSplitPoint) << std::endl;
-
-	const int numFact = 500;
+	const int numFact = 100;
 	BigInteger fact = FindFactorial(numFact);
 	
 	std::cout << numFact << "! = " << fact << std::endl;
-
 
 	a.SetInteger("0");
 
@@ -103,8 +81,6 @@ int main()
 	//std::cout << fact << std::endl;
 	//std::cout << c << std::endl;
 	//std::cout << d << std::endl;
-
-	
 
 	return 0;
 

@@ -41,10 +41,10 @@ void Testing::TestingBigIntMathTiming(int trialsCount)
 	std::cout << "Running the timing trials" << std::endl;
 	for (int i = 0; i < trialsCount; i++)
 	{
-		
+
 		long long int randNum1 = distrib(gen);
 		long long int randNum2 = distrib(gen);
-		std::string randNum2Str = std::to_string(randNum2);
+		std::string randNum2Str = std::to_string(randNum2) + "321182374981729384798127398723987413102938482176354786512837645786125347652763547612534786512763457861252098172364871623874618273648796128374619872364871623847612897364347651278635476851237645176253476512763457612534765127634576125374651762534765127364576125376451728653487651237864578126";
 
 		trialCount++;
 
@@ -86,7 +86,7 @@ void Testing::TestingBigIntMathTiming(int trialsCount)
 	std::cout << "Test Results: " << std::endl;
 	std::cout << "Adding Time Average: " << addTotalTime.count() << " microseconds" << std::endl;
 	std::cout << "Subtracing Time Average: " << subTotalTime.count() << " microseconds" << std::endl;
-	std::cout << "Multiplying Time Average: " << multiTotalTime.count() << " microseconds" << std::endl;
+	std::cout << "Multiplying(Long) Time Average: " << multiTotalTime.count() << " microseconds" << std::endl;
 
 	std::cout << "---------------------TESTING COMPLETED----------------------" << std::endl;
 	std::cout << "Enter any character into the console to continue." << std::endl;

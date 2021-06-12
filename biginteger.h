@@ -27,9 +27,6 @@ public:
 	/** Copy Constuctor */
 	BigInteger(const BigInteger& integer);
 	
-	/** Destructor */
-	~BigInteger();
-	
 	/**
 	 * Converts the string into a array and stores it and sets it.
 	 * @param number - The number to be stored into the Big Integer.
@@ -93,7 +90,7 @@ public:
 	BigInteger Sub(long number);
 	BigInteger Sub(long long number);
 
-	void MultiplyToThis(std::string number);
+	void MultiplyToThis(const std::string number);
 
 	/**
 	 * A overloaded assignment operator using the copy and swap idiom
@@ -172,11 +169,6 @@ private:
 
 	/** Removes leading zero from the number. */
 	void CleanUpNumber(std::deque<char>& numVec);
-	
-
-	void LongMultiplicationToThis(const std::string number);
-
-	BigInteger KaratsubaAlgorithm(const std::string x, const std::string y);
 
 private:
 
