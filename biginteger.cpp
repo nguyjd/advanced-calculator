@@ -1334,6 +1334,15 @@ void BigInteger::DivideToThis(const std::string number)
 	bool firstNumberPositive = dividend.positive;
 	bool secondNumberPositive = divisor.positive;
 
+	/** Check to ensure that both numbers are valid. */
+	if (!VerifyNumber(number) || !VerifyNumber(strInteger))
+	{
+
+		std::cout << "Invalid number to divide." << std::endl;
+		return;
+
+	}
+
 	/** Set both of the number to positive*/
 	dividend.positive = true;
 	divisor.positive = true;
@@ -1551,6 +1560,15 @@ void BigInteger::ModulusToThis(const std::string number)
 
 	/** Uses almost the same code as divide */
 	BigInteger divisor = number;
+
+	/** Check to ensure that both numbers are valid. */
+	if (!VerifyNumber(number) || !VerifyNumber(strInteger))
+	{
+
+		std::cout << "Invalid number to divide." << std::endl;
+		return;
+
+	}
 
 	/** Set both of the number to positive*/
 	bool isPositive = positive;
