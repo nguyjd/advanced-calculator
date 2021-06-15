@@ -952,16 +952,8 @@ void BigInteger::ConvertStringToBigInteger(const std::string numStr, std::deque<
 
 	
 	/** Filled the array with the numbers from the string. */
-	bool leadingZerosRemoved = false;
 	for (char character : numStr)
 	{
-
-		if (character != '0')
-		{
-
-			leadingZerosRemoved = true;
-
-		}
 
 		if (character >= '0' && character <= '9')
 		{ 
@@ -971,6 +963,9 @@ void BigInteger::ConvertStringToBigInteger(const std::string numStr, std::deque<
 		}
 
 	}
+
+	/** Remove the leading zero if there are any. */
+	CleanUpNumber(numVec);
 
 }
 
@@ -1035,7 +1030,7 @@ void BigInteger::CleanUpNumber(std::deque<char>& numVec)
 
 }
 
-BigInteger BigInteger::LongMultiplyThread(std::deque<char> firstNum, char digit, long long int place)
+BigInteger BigInteger::LongMultiplyThread(std::deque<char> firstNum, char digit, unsigned long long int place)
 {
 	
 	BigInteger returnInt;
@@ -1045,7 +1040,7 @@ BigInteger BigInteger::LongMultiplyThread(std::deque<char> firstNum, char digit,
 	
 	std::deque<char>::const_reverse_iterator firstNumberPtr = firstNum.crbegin();
 	
-	for (long long int i = 0; i < place; i++)
+	for (unsigned long long int i = 0; i < place; i++)
 	{
 
 		returnInt.integer.push_front(0);
@@ -1110,7 +1105,7 @@ void BigInteger::MultiplyToThis(const std::string number)
 	}
 
 
-	long long int counter = 0;
+	unsigned long long int counter = 0;
 	std::deque<std::future<BigInteger>> threads;
 	std::deque<char>::const_reverse_iterator secondNumberPtr = secondNumber.crbegin();
 	while (secondNumberPtr != secondNumber.crend())
@@ -1135,10 +1130,114 @@ void BigInteger::MultiplyToThis(const std::string number)
 	*this = 0;
 	for (auto& thread : threads)
 	{
-			
+
 		*this += thread.get();
 
 	}
+
+	if (secondNumberPositive != firstNumberPositive)
+	{
+
+		positive = false;
+
+	}
+	else
+	{
+
+		positive = true;
+
+	}
+
+	/** Remove the leading zero if there are any. */
+	CleanUpNumber(integer);
+
+	/** Update the stored string */
+	ConvertBigIntegerToString(strInteger, integer, positive);
+
+}
+
+void BigInteger::DivideToThis(const std::string number)
+{
+
+	BigInteger dividend = *this;
+	BigInteger divisor = number;
+	bool firstNumberPositive = dividend.positive;
+	bool secondNumberPositive = divisor.positive;
+
+	/** Set both of the number to positive*/
+	dividend.positive = true;
+	divisor.positive = true;
+
+	/** Check to see if the divisor is 0. */
+	if (divisor == 0)
+	{
+
+		std::cout << "Invalid number to divide. (Tried to divide by zero)" << std::endl;
+		return;
+
+	}
+
+	/** Optimizing the code. */
+	/** Check to see if the divisor is 1. */
+	if (divisor == 1)
+	{
+
+		return;
+
+	}
+
+	/** Optimizing the code. */
+	/** Return zero due to intger division */
+	if (dividend < divisor)
+	{
+
+		*this = 0;
+		return;
+
+	}
+	else if (dividend == divisor)
+	{
+
+		*this = 1;
+		return;
+
+	}
+
+	
+	unsigned long long int amountofUnprocessedDigits = dividend.integer.size() - divisor.integer.size();
+	integer.clear();
+
+	/** Multiply the divisor so the amount of digits are the same.*/
+	for (unsigned long long int i = 0; i < amountofUnprocessedDigits; i++)
+	{
+
+		divisor.integer.push_back(0);
+
+	}
+
+	char lastQuotientDigit = 0;
+	while (amountofUnprocessedDigits >= 0)
+	{
+
+		if (dividend < divisor)
+		{
+
+			integer.push_back(lastQuotientDigit);
+			divisor.integer.pop_back();
+			lastQuotientDigit = 0;
+
+			/** Break out of the loop when there is no more digits to process. */
+			if (amountofUnprocessedDigits == 0) { break; }
+
+			amountofUnprocessedDigits--;
+			continue;
+
+		}
+
+		dividend -= divisor;
+		lastQuotientDigit++;
+
+	}	
 
 	if (secondNumberPositive != firstNumberPositive)
 	{

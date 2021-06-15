@@ -95,6 +95,8 @@ public:
 
 	void MultiplyToThis(const std::string number);
 
+	void DivideToThis(const std::string number);
+
 	/**
 	 * A overloaded assignment operator using the copy and swap idiom
 	 * @param num - The BigInteger that is being assigned to the BigInteger left of the equal sign.
@@ -173,7 +175,7 @@ private:
 	/** Removes leading zero from the number. */
 	void CleanUpNumber(std::deque<char>& numVec);
 
-	BigInteger LongMultiplyThread(std::deque<char> firstNum, char digit, long long int place);
+	BigInteger LongMultiplyThread(std::deque<char> firstNum, char digit, unsigned long long int place);
 
 private:
 
