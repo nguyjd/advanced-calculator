@@ -82,7 +82,7 @@ public:
 	void SubToThis(long long number);
 
 	/**
-	 * Adds a number to the stored number in the array.
+	 * Subtracts a number to the stored number in the array.
 	 * @param number - The number being subtracted with the array.
 	 * @return The subtraction of the internal number and the given number as a BigInteger
 	 */
@@ -93,6 +93,10 @@ public:
 	BigInteger Sub(long number);
 	BigInteger Sub(long long number);
 
+	/**
+	 * Multiplied a number to the stored number in the array.
+	 * @param number - The number being multiplied to the array.
+	 */
 	void MultiplyToThis(const std::string number);
 	void MultiplyToThis(BigInteger number);
 	void MultiplyToThis(char number);
@@ -100,6 +104,11 @@ public:
 	void MultiplyToThis(long number);
 	void MultiplyToThis(long long number);
 
+	/**
+	 * Multiplied a number to the stored number in the array.
+	 * @param number - The number being multiplied with the array.
+	 * @return The multiplication of the internal number and the given number as a BigInteger
+	 */
 	BigInteger Multiply(const std::string number);
 	BigInteger Multiply(BigInteger number);
 	BigInteger Multiply(char number);
@@ -107,6 +116,10 @@ public:
 	BigInteger Multiply(long number);
 	BigInteger Multiply(long long number);
 
+	/**
+	 * Divide a number to the stored number in the array.
+	 * @param number - The number being divided to the array.
+	 */
 	void DivideToThis(const std::string number);
 	void DivideToThis(BigInteger number);
 	void DivideToThis(char number);
@@ -114,6 +127,11 @@ public:
 	void DivideToThis(long number);
 	void DivideToThis(long long number);
 
+	/**
+	 * Divide a number to the stored number in the array.
+	 * @param number - The number being divided with the array.
+	 * @return The division of the internal number and the given number as a BigInteger
+	 */
 	BigInteger Divide(const std::string number);
 	BigInteger Divide(BigInteger number);
 	BigInteger Divide(char number);
@@ -121,6 +139,10 @@ public:
 	BigInteger Divide(long number);
 	BigInteger Divide(long long number);
 
+	/**
+	 * Modulus a number to the stored number in the array.
+	 * @param number - The number being modulus to the array.
+	 */
 	void ModulusToThis(const std::string number);
 	void ModulusToThis(BigInteger number);
 	void ModulusToThis(char number);
@@ -128,6 +150,11 @@ public:
 	void ModulusToThis(long number);
 	void ModulusToThis(long long number);
 
+	/**
+	 * Modulus a number to the stored number in the array.
+	 * @param number - The number being modulus with the array.
+	 * @return The modulus of the internal number and the given number as a BigInteger
+	 */
 	BigInteger Modulus(const std::string number);
 	BigInteger Modulus(BigInteger number);
 	BigInteger Modulus(char number);
@@ -156,10 +183,21 @@ public:
 	 */
 	BigInteger operator-(const BigInteger& num);
 
-	// TODO: COMMENT THIS
+	/**
+	 * A overloaded multiplication operator
+	 * @param num - A number that is being multiplied to the BigInteger left of the equal sign.
+	 * @return A Biginteger with the value of the multiplication.
+	 */
 	BigInteger operator*(const BigInteger& num);
 
+	/**
+	 * A overloaded division operator
+	 * @param num - A number that is being divided to the BigInteger left of the equal sign.
+	 * @return A Biginteger with the value of the division.
+	 */
 	BigInteger operator/(const BigInteger& num);
+
+	/** A overloaded modulus operator */
 	BigInteger operator%(const BigInteger& num);
 
 	/** A overloaded increment operator */
@@ -170,12 +208,14 @@ public:
 	BigInteger& operator--();
 	BigInteger operator--(int);
 
-	/** A overloaded addition and subtraction operator */
+	/** A overloaded addition and subtraction assignment operator */
 	BigInteger& operator+=(const BigInteger& num);
 	BigInteger& operator-=(const BigInteger& num);
 
+	/** A overloaded multiplication assignment operator */
 	BigInteger operator*=(const BigInteger& num);
 
+	/** A overloaded division and modulus assignment operator */
 	BigInteger operator/=(const BigInteger& num);
 	BigInteger operator%=(const BigInteger& num);
 
@@ -189,6 +229,7 @@ public:
 
 protected:
 
+	/** Input and output operator */
 	friend std::ostream& operator<<(std::ostream& output, const BigInteger& num);
 	friend std::istream& operator>>(std::istream& input, BigInteger& num);
 
@@ -219,6 +260,13 @@ private:
 	/** Removes leading zero from the number. */
 	void CleanUpNumber(std::deque<char>& numVec);
 
+	/**
+	 * Multiply a number by a single digit.
+	 * Used to multi-thread the multiplication function.
+	 * @param firstNum - The number being multiplied.
+	 * @param digit - The single digit that multiplies with the first number.
+	 * @param place - The amount of base 10 digit places to extend the digit. 
+	 */
 	BigInteger LongMultiplyThread(std::deque<char> firstNum, char digit, unsigned long long int place);
 
 private:

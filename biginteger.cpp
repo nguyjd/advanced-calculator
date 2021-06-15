@@ -1072,13 +1072,14 @@ void BigInteger::CleanUpNumber(std::deque<char>& numVec)
 BigInteger BigInteger::LongMultiplyThread(std::deque<char> firstNum, char digit, unsigned long long int place)
 {
 	
+	/** A temp object to hold the multiplied value in order to avoid a data race. */
 	BigInteger returnInt;
-	std::string tempBigIntStr;
+
+	/** Holds the value of the multiplication */
 	char product = 0;
 	char carry = 0;
 	
-	std::deque<char>::const_reverse_iterator firstNumberPtr = firstNum.crbegin();
-	
+	/** Extends the digits based off the digit position it was in the array. */
 	for (unsigned long long int i = 0; i < place; i++)
 	{
 
@@ -1086,6 +1087,8 @@ BigInteger BigInteger::LongMultiplyThread(std::deque<char> firstNum, char digit,
 
 	}
 	
+	/** Does the multiplication */
+	std::deque<char>::const_reverse_iterator firstNumberPtr = firstNum.crbegin();
 	while (firstNumberPtr != firstNum.crend())
 	{
 
@@ -1097,16 +1100,18 @@ BigInteger BigInteger::LongMultiplyThread(std::deque<char> firstNum, char digit,
 
 	}
 
+	/** Append the carry the front of the number if there is a carry left. */
 	if (carry != 0)
 	{
 
 		returnInt.integer.push_front(carry);
-		carry = 0;
 
 	}
 
-
+	/** Update the string in the object. */
 	ConvertBigIntegerToString(returnInt.strInteger, returnInt.integer, returnInt.positive);
+
+	/** Makes sure the number is valid. */
 	returnInt.validNumber = returnInt.VerifyNumber(returnInt.strInteger);
 
 	return returnInt;
@@ -1143,37 +1148,47 @@ void BigInteger::MultiplyToThis(const std::string number)
 
 	}
 
-
+	/** Counts the digits place in base 10 */
 	unsigned long long int counter = 0;
-	std::deque<std::future<BigInteger>> threads;
+
+	/** Holds all the values from the threads made. */
+	std::deque<std::future<BigInteger>> futures;
 	std::deque<char>::const_reverse_iterator secondNumberPtr = secondNumber.crbegin();
 	while (secondNumberPtr != secondNumber.crend())
 	{
 
+		/** Skip multiplying by 0 */
 		if (*secondNumberPtr == 0)
 		{
 
+			/** Increment the iterator and digits place. */
 			counter++;
 			secondNumberPtr++;
 			continue;
 
 		}
 		
-		threads.push_back(std::async(std::launch::async, &BigInteger::LongMultiplyThread, this, integer, *secondNumberPtr, counter));
+		/** Create the thread to multiply the array with a single digit. */
+		futures.push_back(std::async(std::launch::async, &BigInteger::LongMultiplyThread, this, integer, *secondNumberPtr, counter));
 
+		/** Increment the iterator and digits place. */
 		counter++;
 		secondNumberPtr++;
 
 	}
 
+	/** Set the array to zero so we can add all the values from the threads. */
 	*this = 0;
-	for (auto& thread : threads)
+
+	/** Get all the values from the threads and add it to the array. */
+	for (auto& future : futures)
 	{
 
-		*this += thread.get();
+		*this += future.get();
 
 	}
 
+	/** Determine the sign for the number. */
 	if (secondNumberPositive != firstNumberPositive)
 	{
 
@@ -1358,11 +1373,8 @@ void BigInteger::DivideToThis(const std::string number)
 
 	}
 
-	
-	unsigned long long int amountofUnprocessedDigits = dividend.integer.size() - divisor.integer.size();
-	integer.clear();
-
 	/** Multiply the divisor so the amount of digits are the same.*/
+	unsigned long long int amountofUnprocessedDigits = dividend.integer.size() - divisor.integer.size();
 	for (unsigned long long int i = 0; i < amountofUnprocessedDigits; i++)
 	{
 
@@ -1370,10 +1382,13 @@ void BigInteger::DivideToThis(const std::string number)
 
 	}
 
+	/** Divide until there is no more digits left to process. */
 	char lastQuotientDigit = 0;
+	integer.clear();
 	while (amountofUnprocessedDigits >= 0)
 	{
 
+		/** Pop back the array and add the quotient digit to the array. */
 		if (dividend < divisor)
 		{
 
@@ -1389,11 +1404,13 @@ void BigInteger::DivideToThis(const std::string number)
 
 		}
 
+		/** Subtract by the divisor. */
 		dividend -= divisor;
 		lastQuotientDigit++;
 
 	}	
 
+	/** Determine the sign for the number. */
 	if (secondNumberPositive != firstNumberPositive)
 	{
 
@@ -1577,7 +1594,7 @@ void BigInteger::ModulusToThis(const std::string number)
 
 	}
 
-	/** Multiply the divisor so the amount of digits are the same.*/
+	/** Multiply the divisor so the amount of digits are the same. */
 	unsigned long long int amountofUnprocessedDigits = integer.size() - divisor.integer.size();
 	for (unsigned long long int i = 0; i < amountofUnprocessedDigits; i++)
 	{
@@ -1586,9 +1603,11 @@ void BigInteger::ModulusToThis(const std::string number)
 
 	}
 
+	/** Divide until there is no more digits left to process. */
 	while (amountofUnprocessedDigits >= 0)
 	{
 
+		/** Pop back the array */
 		if (*this < divisor)
 		{
 
@@ -1602,10 +1621,12 @@ void BigInteger::ModulusToThis(const std::string number)
 
 		}
 
+		/** Subtract by the divisor. */
 		*this -= divisor;
 
 	}
 
+	/** Add the minus sign if the number is not zero. */
 	if (*this != 0)
 	{
 
