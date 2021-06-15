@@ -45,8 +45,10 @@ int main()
 	//test.TestingBigIntLessThanOrEqualComparisonOperator(1000, false);
 	//test.TestingBigIntGreaterThanOrEqualComparisonOperator(1000, false);
 	
-	test.TestingBigIntMultiplication(1000, false);
-	test.TestingBigIntMathTiming(200);
+	//test.TestingBigIntMultiplication(1000, false);
+	test.TestingBigIntDivision(10000, true);
+	test.TestingBigIntDivisionRandom(10000, true);
+	test.TestingBigIntMathTiming(1000, true);
 
 	const int numFact = 100;
 	BigInteger fact = FindFactorial(numFact);
@@ -57,9 +59,13 @@ int main()
 
 	BigInteger c;
 
-	std::string g = "1";
+	std::string g = "100";
 
 	c = g;
+
+	std::cout << "c: " << c << std::endl;
+	c.DivideToThis("50");
+	std::cout << "c: " << c << std::endl;
 
 	BigInteger d(80);
 
@@ -79,7 +85,7 @@ int main()
 
 	//std::cout << a << std::endl;
 	//std::cout << fact << std::endl;
-	//std::cout << c << std::endl;
+	std::cout << c << std::endl;
 	//std::cout << d << std::endl;
 
 	return 0;

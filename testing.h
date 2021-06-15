@@ -15,9 +15,11 @@ public:
 
 	Testing();
 
-	void TestingBigIntMathTiming(int trialsCount);
+	void TestingBigIntMathTiming(int trialsCount, bool isRandom);
 
 	void TestingBigIntMultiplication(int trialsCount, bool stopOnFail);
+	void TestingBigIntDivisionRandom(int trialsCount, bool stopOnFail);
+	void TestingBigIntDivision(int trialsCount, bool stopOnFail);
 
 	void TestingBigIntGreaterThanOrEqualComparisonOperator(int trialsCount, bool stopOnFail);
 	void TestingBigIntLessThanOrEqualComparisonOperator(int trialsCount, bool stopOnFail);
