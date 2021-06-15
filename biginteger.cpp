@@ -735,10 +735,49 @@ BigInteger BigInteger::operator-(const BigInteger& num)
 BigInteger BigInteger::operator*(const BigInteger& num)
 {
 
-	// TODO: REDO THE TEMP SOLUTION
-	BigInteger tempBigInt(*this);
-	tempBigInt.MultiplyToThis(num.strInteger);
-	return tempBigInt;
+	return Multiply(num);
+
+}
+
+BigInteger BigInteger::operator/(const BigInteger& num)
+{
+
+	return Divide(num);
+
+}
+
+BigInteger BigInteger::operator%(const BigInteger& num)
+{
+
+	return Modulus(num);
+
+}
+
+BigInteger BigInteger::operator*=(const BigInteger& num)
+{
+
+	MultiplyToThis(num);
+
+	return *this;
+
+}
+
+BigInteger BigInteger::operator/=(const BigInteger& num)
+{
+
+	DivideToThis(num);
+
+	return *this;
+
+}
+
+BigInteger BigInteger::operator%=(const BigInteger& num)
+{
+
+	ModulusToThis(num);
+
+	return *this;
+
 }
 
 BigInteger& BigInteger::operator++()
@@ -1156,6 +1195,122 @@ void BigInteger::MultiplyToThis(const std::string number)
 
 }
 
+void BigInteger::MultiplyToThis(BigInteger number)
+{
+
+	/** Get the string and feed it to the other function */
+	MultiplyToThis(number.GetInteger());
+
+}
+
+void BigInteger::MultiplyToThis(char number)
+{
+
+	/** Convert to string and pass it to the main function. */
+	MultiplyToThis(std::string(1, number));
+
+}
+
+void BigInteger::MultiplyToThis(int number)
+{
+
+	/** Convert to string and pass it to the main function. */
+	MultiplyToThis(std::to_string(number));
+
+}
+
+void BigInteger::MultiplyToThis(long number)
+{
+
+	/** Convert to string and pass it to the main function. */
+	MultiplyToThis(std::to_string(number));
+
+}
+
+void BigInteger::MultiplyToThis(long long number)
+{
+
+	/** Convert to string and pass it to the main function. */
+	MultiplyToThis(std::to_string(number));
+
+}
+
+BigInteger BigInteger::Multiply(const std::string number)
+{
+	/** A object to hold the current values temporarily */
+	BigInteger tempBigInt(*this);
+
+	/** Do the multiplication */
+	tempBigInt.MultiplyToThis(number);
+
+	return tempBigInt;
+}
+
+BigInteger BigInteger::Multiply(BigInteger number)
+{
+
+	/** A object to hold the current values temporarily */
+	BigInteger tempBigInt(*this);
+
+	/** Do the multiplication */
+	tempBigInt.MultiplyToThis(number);
+
+	return tempBigInt;
+
+}
+
+BigInteger BigInteger::Multiply(char number)
+{
+
+	/** A object to hold the current values temporarily */
+	BigInteger tempBigInt(*this);
+
+	/** Do the multiplication */
+	tempBigInt.MultiplyToThis(number);
+
+	return tempBigInt;
+
+}
+
+BigInteger BigInteger::Multiply(int number)
+{
+
+	/** A object to hold the current values temporarily */
+	BigInteger tempBigInt(*this);
+
+	/** Do the multiplication */
+	tempBigInt.MultiplyToThis(number);
+
+	return tempBigInt;
+
+}
+
+BigInteger BigInteger::Multiply(long number)
+{
+
+	/** A object to hold the current values temporarily */
+	BigInteger tempBigInt(*this);
+
+	/** Do the multiplication */
+	tempBigInt.MultiplyToThis(number);
+
+	return tempBigInt;
+
+}
+
+BigInteger BigInteger::Multiply(long long number)
+{
+
+	/** A object to hold the current values temporarily */
+	BigInteger tempBigInt(*this);
+
+	/** Do the multiplication */
+	tempBigInt.MultiplyToThis(number);
+
+	return tempBigInt;
+
+}
+
 void BigInteger::DivideToThis(const std::string number)
 {
 
@@ -1257,6 +1412,330 @@ void BigInteger::DivideToThis(const std::string number)
 
 	/** Update the stored string */
 	ConvertBigIntegerToString(strInteger, integer, positive);
+
+}
+
+void BigInteger::DivideToThis(BigInteger number)
+{
+
+	/** Get the string and feed it to the other function */
+	DivideToThis(number.GetInteger());
+
+}
+
+void BigInteger::DivideToThis(char number)
+{
+
+	/** Convert to string and pass it to the main function. */
+	DivideToThis(std::string(1, number));
+
+}
+
+void BigInteger::DivideToThis(int number)
+{
+
+	/** Convert to string and pass it to the main function. */
+	DivideToThis(std::to_string(number));
+
+}
+
+void BigInteger::DivideToThis(long number)
+{
+
+	/** Convert to string and pass it to the main function. */
+	DivideToThis(std::to_string(number));
+
+}
+
+void BigInteger::DivideToThis(long long number)
+{
+
+	/** Convert to string and pass it to the main function. */
+	DivideToThis(std::to_string(number));
+
+}
+
+BigInteger BigInteger::Divide(const std::string number)
+{
+
+	/** A object to hold the current values temporarily */
+	BigInteger tempBigInt(*this);
+
+	/** Do the divison */
+	tempBigInt.DivideToThis(number);
+
+	return tempBigInt;
+
+}
+
+BigInteger BigInteger::Divide(BigInteger number)
+{
+
+	/** A object to hold the current values temporarily */
+	BigInteger tempBigInt(*this);
+
+	/** Do the divison */
+	tempBigInt.DivideToThis(number);
+
+	return tempBigInt;
+
+}
+
+BigInteger BigInteger::Divide(char number)
+{
+
+	/** A object to hold the current values temporarily */
+	BigInteger tempBigInt(*this);
+
+	/** Do the divison */
+	tempBigInt.DivideToThis(number);
+
+	return tempBigInt;
+
+}
+
+BigInteger BigInteger::Divide(int number)
+{
+	/** A object to hold the current values temporarily */
+	BigInteger tempBigInt(*this);
+
+	/** Do the divison */
+	tempBigInt.DivideToThis(number);
+
+	return tempBigInt;
+}
+
+BigInteger BigInteger::Divide(long number)
+{
+	/** A object to hold the current values temporarily */
+	BigInteger tempBigInt(*this);
+
+	/** Do the divison */
+	tempBigInt.DivideToThis(number);
+
+	return tempBigInt;
+}
+
+BigInteger BigInteger::Divide(long long number)
+{
+
+	/** A object to hold the current values temporarily */
+	BigInteger tempBigInt(*this);
+
+	/** Do the divison */
+	tempBigInt.DivideToThis(number);
+
+	return tempBigInt;
+
+}
+
+void BigInteger::ModulusToThis(const std::string number)
+{
+
+	/** Uses almost the same code as divide */
+	BigInteger divisor = number;
+
+	/** Set both of the number to positive*/
+	bool isPositive = positive;
+	positive = true;
+	divisor.positive = true;
+
+	/** Check to see if the divisor is 0. */
+	if (divisor == 0)
+	{
+
+		std::cout << "Invalid number to divide. (Tried to divide by zero)" << std::endl;
+		std::cout << "Could not find the modulus." << std::endl;
+		return;
+
+	}
+
+	/** Optimizing the code. */
+	/** Check to see if the divisor is 1. */
+	if (divisor == 1)
+	{
+
+		*this = 0;
+		return;
+
+	}
+
+	/** Optimizing the code. */
+	/** Return zero due to intger division */
+	if (*this < divisor)
+	{
+
+		positive = isPositive;
+		return;
+
+	}
+	else if (*this == divisor)
+	{
+
+		*this = 0;
+		return;
+
+	}
+
+	/** Multiply the divisor so the amount of digits are the same.*/
+	unsigned long long int amountofUnprocessedDigits = integer.size() - divisor.integer.size();
+	for (unsigned long long int i = 0; i < amountofUnprocessedDigits; i++)
+	{
+
+		divisor.integer.push_back(0);
+
+	}
+
+	while (amountofUnprocessedDigits >= 0)
+	{
+
+		if (*this < divisor)
+		{
+
+			divisor.integer.pop_back();
+
+			/** Break out of the loop when there is no more digits to process. */
+			if (amountofUnprocessedDigits == 0) { break; }
+
+			amountofUnprocessedDigits--;
+			continue;
+
+		}
+
+		*this -= divisor;
+
+	}
+
+	if (*this != 0)
+	{
+
+		positive = isPositive;
+
+	}
+
+	/** Remove the leading zero if there are any. */
+	CleanUpNumber(integer);
+
+	/** Update the stored string */
+	ConvertBigIntegerToString(strInteger, integer, positive);
+
+}
+
+void BigInteger::ModulusToThis(BigInteger number)
+{
+
+	/** Get the string and feed it to the other function */
+	ModulusToThis(number.GetInteger());
+
+}
+
+void BigInteger::ModulusToThis(char number)
+{
+
+	/** Convert to string and pass it to the main function. */
+	ModulusToThis(std::string(1, number));
+
+}
+
+void BigInteger::ModulusToThis(int number)
+{
+
+	/** Convert to string and pass it to the main function. */
+	ModulusToThis(std::to_string(number));
+
+}
+
+void BigInteger::ModulusToThis(long number)
+{
+
+	/** Convert to string and pass it to the main function. */
+	ModulusToThis(std::to_string(number));
+
+}
+
+void BigInteger::ModulusToThis(long long number)
+{
+
+	/** Convert to string and pass it to the main function. */
+	ModulusToThis(std::to_string(number));
+
+}
+
+BigInteger BigInteger::Modulus(const std::string number)
+{
+
+	/** A object to hold the current values temporarily */
+	BigInteger tempBigInt(*this);
+
+	/** Do the divison */
+	tempBigInt.DivideToThis(number);
+
+	return tempBigInt;
+
+}
+
+BigInteger BigInteger::Modulus(BigInteger number)
+{
+
+	/** A object to hold the current values temporarily */
+	BigInteger tempBigInt(*this);
+
+	/** Do the divison */
+	tempBigInt.DivideToThis(number);
+
+	return tempBigInt;
+
+}
+
+BigInteger BigInteger::Modulus(char number)
+{
+
+	/** A object to hold the current values temporarily */
+	BigInteger tempBigInt(*this);
+
+	/** Do the divison */
+	tempBigInt.DivideToThis(number);
+
+	return tempBigInt;
+
+}
+
+BigInteger BigInteger::Modulus(int number)
+{
+
+	/** A object to hold the current values temporarily */
+	BigInteger tempBigInt(*this);
+
+	/** Do the divison */
+	tempBigInt.DivideToThis(number);
+
+	return tempBigInt;
+
+}
+
+BigInteger BigInteger::Modulus(long number)
+{
+
+	/** A object to hold the current values temporarily */
+	BigInteger tempBigInt(*this);
+
+	/** Do the divison */
+	tempBigInt.DivideToThis(number);
+
+	return tempBigInt;
+
+}
+
+BigInteger BigInteger::Modulus(long long number)
+{
+
+	/** A object to hold the current values temporarily */
+	BigInteger tempBigInt(*this);
+
+	/** Do the divison */
+	tempBigInt.DivideToThis(number);
+
+	return tempBigInt;
 
 }
 

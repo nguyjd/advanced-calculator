@@ -94,8 +94,46 @@ public:
 	BigInteger Sub(long long number);
 
 	void MultiplyToThis(const std::string number);
+	void MultiplyToThis(BigInteger number);
+	void MultiplyToThis(char number);
+	void MultiplyToThis(int number);
+	void MultiplyToThis(long number);
+	void MultiplyToThis(long long number);
+
+	BigInteger Multiply(const std::string number);
+	BigInteger Multiply(BigInteger number);
+	BigInteger Multiply(char number);
+	BigInteger Multiply(int number);
+	BigInteger Multiply(long number);
+	BigInteger Multiply(long long number);
 
 	void DivideToThis(const std::string number);
+	void DivideToThis(BigInteger number);
+	void DivideToThis(char number);
+	void DivideToThis(int number);
+	void DivideToThis(long number);
+	void DivideToThis(long long number);
+
+	BigInteger Divide(const std::string number);
+	BigInteger Divide(BigInteger number);
+	BigInteger Divide(char number);
+	BigInteger Divide(int number);
+	BigInteger Divide(long number);
+	BigInteger Divide(long long number);
+
+	void ModulusToThis(const std::string number);
+	void ModulusToThis(BigInteger number);
+	void ModulusToThis(char number);
+	void ModulusToThis(int number);
+	void ModulusToThis(long number);
+	void ModulusToThis(long long number);
+
+	BigInteger Modulus(const std::string number);
+	BigInteger Modulus(BigInteger number);
+	BigInteger Modulus(char number);
+	BigInteger Modulus(int number);
+	BigInteger Modulus(long number);
+	BigInteger Modulus(long long number);
 
 	/**
 	 * A overloaded assignment operator using the copy and swap idiom
@@ -121,6 +159,9 @@ public:
 	// TODO: COMMENT THIS
 	BigInteger operator*(const BigInteger& num);
 
+	BigInteger operator/(const BigInteger& num);
+	BigInteger operator%(const BigInteger& num);
+
 	/** A overloaded increment operator */
 	BigInteger& operator++();
 	BigInteger operator++(int);
@@ -129,11 +170,14 @@ public:
 	BigInteger& operator--();
 	BigInteger operator--(int);
 
-	// Remaining operators *, /, %, *=, /=, %=
-
 	/** A overloaded addition and subtraction operator */
 	BigInteger& operator+=(const BigInteger& num);
 	BigInteger& operator-=(const BigInteger& num);
+
+	BigInteger operator*=(const BigInteger& num);
+
+	BigInteger operator/=(const BigInteger& num);
+	BigInteger operator%=(const BigInteger& num);
 
 	/** All the comparison operators */
 	bool operator==(const BigInteger& num);
