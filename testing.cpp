@@ -1,13 +1,5 @@
 #include "testing.h"
 
-Testing::Testing()
-{
-
-	passCount = 0;
-	trialCount = 0;
-
-}
-
 void Testing::TestingBigIntMathTiming(int trialsCount, bool isRandom)
 {
 
@@ -15,8 +7,8 @@ void Testing::TestingBigIntMathTiming(int trialsCount, bool isRandom)
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<long long int> distrib(LLONG_MIN, LLONG_MAX);
-	passCount = 0;
-	trialCount = 0;
+	int passCount = 0;
+	int trialCount = 0;
 
 	if (trialsCount <= 0)
 	{
@@ -33,11 +25,13 @@ void Testing::TestingBigIntMathTiming(int trialsCount, bool isRandom)
 	std::chrono::microseconds subTotalTime = std::chrono::microseconds::zero();
 	std::chrono::microseconds multiTotalTime = std::chrono::microseconds::zero();
 	std::chrono::microseconds divideTotalTime = std::chrono::microseconds::zero();
+	std::chrono::microseconds modTotalTime = std::chrono::microseconds::zero();
 
 	BigInteger add;
 	BigInteger sub;
 	BigInteger multi;
 	BigInteger divide;
+	BigInteger mod;
 
 	if (isRandom)
 	{
@@ -50,7 +44,7 @@ void Testing::TestingBigIntMathTiming(int trialsCount, bool isRandom)
 
 			long long int randNum1 = distrib(gen);
 			long long int randNum2 = distrib(gen);
-			std::string randNum2Str = std::to_string(randNum2) + "191283709127098471092819783648712638947612938764189764123843126812347681972634987612398763421698713283476863784267831297683967849367842169784367891324967836927814961783246879134869714326879132468971324689713248967132648791893247668719342687123467891234687913246879132468791324689734714327869867913249687134269877328736498176239847612647162767893127968678149239786416287683419128370912709847109281978364871263894761293876418976412384312681234768197263498761239876342169871328347686378426783129768396784936784216978436789132496783692781496178324687913486971432687913246897132468971324896713264879189324766871934268712346789123468791324687913246879132468973471432786986791324968713426987732873649817623984761264716276789312796867814923978641628768341912837091270984710928197836487126389476129387641897641238431268123476819726349876123987634216987132834768637842678312976839678493678421697843678913249678369278149617832468791348697143268791324689713246897132489671326487918932476687193426871234678912346879132468791324687913246897347143278698679132496871342698773287364981762398476126471627678931279686781492397864162876834191283709127098471092819783648712638947612938764189764123843126812347681972634987612398763421698713283476863784267831297683967849367842169784367891324967836927814961783246879134869714326879132468971324689713248967132648791893247668719342687123467891234687913246879132468791324689734714327869867913249687134269877328736498176239847612647162767893127968678149239786416287683419128370912709847109281978364871263894761293876418976412384312681234768197263498761239876342169871328347686378426783129768396784936784216978436789132496783692781496178324687913486971432687913246897132468971324896713264879189324766871934268712346789123468791324687913246879132468973471432786986791324968713426987732873649817623984761264716276789312796867814923978641628768341912837091270984710928197836487126389476129387641897641238431268123476819726349876123987634216987132834768637842678312976839678493678421697843678913249678369278149617832468791348697143268791324689713246897132489671326487918932476687193426871234678912346879132468791324687913246897347143278698679132496871342698773287364981762398476126471627678931279686781492397864162876834191283709127098471092819783648712638947612938764189764123843126812347681972634987612398763421698713283476863784267831297683967849367842169784367891324967836927814961783246879134869714326879132468971324689713248967132648791893247668719342687123467891234687913246879132468791324689734714327869867913249687134269877328736498176239847612647162767893127968678149239786416287683419128370912709847109281978364871263894761293876418976412384312681234768197263498761239876342169871328347686378426783129768396784936784216978436789132496783692781496178324687913486971432687913246897132468971324896713264879189324766871934268712346789123468791324687913246879132468973471432786986791324968713426987732873649817623984761264716276789312796867814923978641628768341912837091270984710928197836487126389476129387641897641238431268123476819726349876123987634216987132834768637842678312976839678493678421697843678913249678369278149617832468791348697143268791324689713246897132489671326487918932476687193426871234678912346879132468791324687913246897347143278698679132496871342698773287364981762398476126471627678931279686781492397864162876834191283709127098471092819783648712638947612938764189764123843126812347681972634987612398763421698713283476863784267831297683967849367842169784367891324967836927814961783246879134869714326879132468971324689713248967132648791893247668719342687123467891234687913246879132468791324689734714327869867913249687134269877328736498176239847612647162767893127968678149239786416287683419128370912709847109281978364871263894761293876418976412384312681234768197263498761239876342169871328347686378426783129768396784936784216978436789132496783692781496178324687913486971432687913246897132468971324896713264879189324766871934268712346789123468791324687913246879132468973471432786986791324968713426987732873649817623984761264716276789312796867814923978641628768341912837091270984710928197836487126389476129387641897641238431268123476819726349876123987634216987132834768637842678312976839678493678421697843678913249678369278149617832468791348697143268791324689713246897132489671326487918932476687193426871234678912346879132468791324687913246897347143278698679132496871342698773287364981762398476126471627678931279686781492397864162876834191283709127098471092819783648712638947612938764189764123843126812347681972634987612398763421698713283476863784267831297683967849367842169784367891324967836927814961783246879134869714326879132468971324689713248967132648791893247668719342687123467891234687913246879132468791324689734714327869867913249687134269877328736498176239847612647162767893127968678149239786416287683419128370912709847109281978364871263894761293876418976412384312681234768197263498761239876342169871328347686378426783129768396784936784216978436789132496783692781496178324687913486971432687913246897132468971324896713264879189324766871934268712346789123468791324687913246879132468973471432786986791324968713426987732873649817623984761264716276789312796867814923978641628768341912837091270984710928197836487126389476129387641897641238431268123476819726349876123987634216987132834768637842678312976839678493678421697843678913249678369278149617832468791348697143268791324689713246897132489671326487918932476687193426871234678912346879132468791324687913246897347143278698679132496871342698773287364981762398476126471627678931279686781492397864162876834191283709127098471092819783648712638947612938764189764123843126812347681972634987612398763421698713283476863784267831297683967849367842169784367891324967836927814961783246879134869714326879132468971324689713248967132648791893247668719342687123467891234687913246879132468791324689734714327869867913249687134269877328736498176239847612647162767893127968678149239786416287683419128370912709847109281978364871263894761293876418976412384312681234768197263498761239876342169871328347686378426783129768396784936784216978436789132496783692781496178324687913486971432687913246897132468971324896713264879189324766871934268712346789123468791324687913246879132468973471432786986791324968713426987732873649817623984761264716276789312796867814923978641628768341912837091270984710928197836487126389476129387641897641238431268123476819726349876123987634216987132834768637842678312976839678493678421697843678913249678369278149617832468791348697143268791324689713246897132489671326487918932476687193426871234678912346879132468791324687913246897347143278698679132496871342698773287364981762398476126471627678931279686781492397864162876834191283709127098471092819783648712638947612938764189764123843126812347681972634987612398763421698713283476863784267831297683967849367842169784367891324967836927814961783246879134869714326879132468971324689713248967132648791893247668719342687123467891234687913246879132468791324689734714327869867913249687134269877328736498176239847612647162767893127968678149239786416287683419128370912709847109281978364871263894761293876418976412384312681234768197263498761239876342169871328347686378426783129768396784936784216978436789132496783692781496178324687913486971432687913246897132468971324896713264879189324766871934268712346789123468791324687913246879132468973471432786986791324968713426987732873649817623984761264716276789312796867814923978641628768341912837091270984710928197836487126389476129387641897641238431268123476819726349876123987634216987132834768637842678312976839678493678421697843678913249678369278149617832468791348697143268791324689713246897132489671326487918932476687193426871234678912346879132468791324687913246897347143278698679132496871342698773287364981762398476126471627678931279686781492397864162876834191283709127098471092819783648712638947612938764189764123843126812347681972634987612398763421698713283476863784267831297683967849367842169784367891324967836927814961783246879134869714326879132468971324689713248967132648791893247668719342687123467891234687913246879132468791324689734714327869867913249687134269877328736498176239847612647162767893127968678149239786416287683419128370912709847109281978364871263894761293876418976412384312681234768197263498761239876342169871328347686378426783129768396784936784216978436789132496783692781496178324687913486971432687913246897132468971324896713264879189324766871934268712346789123468791324687913246879132468973471432786986791324968713426987732873649817623984761264716276789312796867814923978641628768341912837091270984710928197836487126389476129387641897641238431268123476819726349876123987634216987132834768637842678312976839678493678421697843678913249678369278149617832468791348697143268791324689713246897132489671326487918932476687193426871234678912346879132468791324687913246897347143278698679132496871342698773287364981762398476126471627678931279686781492397864162876834191283709127098471092819783648712638947612938764189764123843126812347681972634987612398763421698713283476863784267831297683967849367842169784367891324967836927814961783246879134869714326879132468971324689713248967132648791893247668719342687123467891234687913246879132468791324689734714327869867913249687134269877328736498176239847612647162767893127968678149239786416287683419128370912709847109281978364871263894761293876418976412384312681234768197263498761239876342169871328347686378426783129768396784936784216978436789132496783692781496178324687913486971432687913246897132468971324896713264879189324766871934268712346789123468791324687913246879132468973471432786986791324968713426987732873649817623984761264716276789312796867814923978641628768341912837091270984710928197836487126389476129387641897641238431268123476819726349876123987634216987132834768637842678312976839678493678421697843678913249678369278149617832468791348697143268791324689713246897132489671326487918932476687193426871234678912346879132468791324687913246897347143278698679132496871342698773287364981762398476126471627678931279686781492397864162876834191283709127098471092819783648712638947612938764189764123843126812347681972634987612398763421698713283476863784267831297683967849367842169784367891324967836927814961783246879134869714326879132468971324689713248967132648791893247668719342687123467891234687913246879132468791324689734714327869867913249687134269877328736498176239847612647162767893127968678149239786416287683419128370912709847109281978364871263894761293876418976412384312681234768197263498761239876342169871328347686378426783129768396784936784216978436789132496783692781496178324687913486971432687913246897132468971324896713264879189324766871934268712346789123468791324687913246879132468973471432786986791324968713426987732873649817623984761264716276789312796867814923978641628768341912837091270984710928197836487126389476129387641897641238431268123476819726349876123987634216987132834768637842678312976839678493678421697843678913249678369278149617832468791348697143268791324689713246897132489671326487918932476687193426871234678912346879132468791324687913246897347143278698679132496871342698773287364981762398476126471627678931279686781492397864162876834191283709127098471092819783648712638947612938764189764123843126812347681972634987612398763421698713283476863784267831297683967849367842169784367891324967836927814961783246879134869714326879132468971324689713248967132648791893247668719342687123467891234687913246879132468791324689734714327869867913249687134269877328736498176239847612647162767893127968678149239786416287683419128370912709847109281978364871263894761293876418976412384312681234768197263498761239876342169871328347686378426783129768396784936784216978436789132496783692781496178324687913486971432687913246897132468971324896713264879189324766871934268712346789123468791324687913246879132468973471432786986791324968713426987732873649817623984761264716276789312796867814923978641628768341912837091270984710928197836487126389476129387641897641238431268123476819726349876123987634216987132834768637842678312976839678493678421697843678913249678369278149617832468791348697143268791324689713246897132489671326487918932476687193426871234678912346879132468791324687913246897347143278698679132496871342698773287364981762398476126471627678931279686781492397864162876834191283709127098471092819783648712638947612938764189764123843126812347681972634987612398763421698713283476863784267831297683967849367842169784367891324967836927814961783246879134869714326879132468971324689713248967132648791893247668719342687123467891234687913246879132468791324689734714327869867913249687134269877328736498176239847612647162767893127968678149239786416287683419128370912709847109281978364871263894761293876418976412384312681234768197263498761239876342169871328347686378426783129768396784936784216978436789132496783692781496178324687913486971432687913246897132468971324896713264879189324766871934268712346789123468791324687913246879132468973471432786986791324968713426987732873649817623984761264716276789312796867814923978641628768341912837091270984710928197836487126389476129387641897641238431268123476819726349876123987634216987132834768637842678312976839678493678421697843678913249678369278149617832468791348697143268791324689713246897132489671326487918932476687193426871234678912346879132468791324687913246897347143278698679132496871342698773287364981762398476126471627678931279686781492397864162876834";
+			std::string randNum2Str = std::to_string(randNum2);
 
 			trialCount++;
 
@@ -58,27 +52,33 @@ void Testing::TestingBigIntMathTiming(int trialsCount, bool isRandom)
 			sub = randNum1;
 			multi = randNum1;
 			divide = randNum1;
+			mod = randNum1;
 
 			auto addStartTime = std::chrono::steady_clock::now();
-			add.AddToThis(randNum2Str);
+			add + randNum2Str;
 			auto addStopTime = std::chrono::steady_clock::now();
 
 			auto subStartTime = std::chrono::steady_clock::now();
-			sub.SubToThis(randNum2Str);
+			sub - randNum2Str;
 			auto subStopTime = std::chrono::steady_clock::now();
 
 			auto multiStartTime = std::chrono::steady_clock::now();
-			multi.MultiplyToThis(randNum2Str);
+			multi * randNum2Str;
 			auto multiStopTime = std::chrono::steady_clock::now();
 
 			auto divideStartTime = std::chrono::steady_clock::now();
-			divide.DivideToThis(randNum2Str);
+			divide / randNum2Str;
 			auto divideStopTime = std::chrono::steady_clock::now();
+
+			auto modStartTime = std::chrono::steady_clock::now();
+			mod % randNum2Str;
+			auto modStopTime = std::chrono::steady_clock::now();
 
 			addTotalTime += std::chrono::duration_cast<std::chrono::microseconds>(addStopTime - addStartTime);
 			subTotalTime += std::chrono::duration_cast<std::chrono::microseconds>(subStopTime - subStartTime);
 			multiTotalTime += std::chrono::duration_cast<std::chrono::microseconds>(multiStopTime - multiStartTime);
 			divideTotalTime += std::chrono::duration_cast<std::chrono::microseconds>(divideStopTime - divideStartTime);
+			modTotalTime += std::chrono::duration_cast<std::chrono::microseconds>(modStopTime - modStartTime);
 
 			std::cout << "Trial " << i << " completed." << std::endl;
 			std::cout << std::endl;
@@ -104,27 +104,33 @@ void Testing::TestingBigIntMathTiming(int trialsCount, bool isRandom)
 			sub = randNum1;
 			multi = randNum1;
 			divide = randNum1;
+			mod = randNum1;
 
 			auto addStartTime = std::chrono::steady_clock::now();
-			add.AddToThis(randNum2Str);
+			add + randNum2Str;
 			auto addStopTime = std::chrono::steady_clock::now();
 
 			auto subStartTime = std::chrono::steady_clock::now();
-			sub.SubToThis(randNum2Str);
+			sub - randNum2Str;
 			auto subStopTime = std::chrono::steady_clock::now();
 
 			auto multiStartTime = std::chrono::steady_clock::now();
-			multi.MultiplyToThis(randNum2Str);
+			multi * randNum2Str;
 			auto multiStopTime = std::chrono::steady_clock::now();
 
 			auto divideStartTime = std::chrono::steady_clock::now();
-			divide.DivideToThis(randNum2Str);
+			divide / randNum2Str;
 			auto divideStopTime = std::chrono::steady_clock::now();
+
+			auto modStartTime = std::chrono::steady_clock::now();
+			mod % randNum2Str;
+			auto modStopTime = std::chrono::steady_clock::now();
 
 			addTotalTime += std::chrono::duration_cast<std::chrono::microseconds>(addStopTime - addStartTime);
 			subTotalTime += std::chrono::duration_cast<std::chrono::microseconds>(subStopTime - subStartTime);
 			multiTotalTime += std::chrono::duration_cast<std::chrono::microseconds>(multiStopTime - multiStartTime);
 			divideTotalTime += std::chrono::duration_cast<std::chrono::microseconds>(divideStopTime - divideStartTime);
+			modTotalTime += std::chrono::duration_cast<std::chrono::microseconds>(modStopTime - modStartTime);
 
 			std::cout << "Trial " << i << " completed." << std::endl;
 			std::cout << std::endl;
@@ -133,10 +139,6 @@ void Testing::TestingBigIntMathTiming(int trialsCount, bool isRandom)
 
 	}
 
-	
-
-
-
 	if (trialsCount > 0)
 	{
 
@@ -144,6 +146,7 @@ void Testing::TestingBigIntMathTiming(int trialsCount, bool isRandom)
 		subTotalTime /= trialsCount;
 		multiTotalTime /= trialsCount;
 		divideTotalTime /= trialsCount;
+		modTotalTime /= trialsCount;
 
 	}
 	
@@ -156,6 +159,7 @@ void Testing::TestingBigIntMathTiming(int trialsCount, bool isRandom)
 	std::cout << "Subtracing Time Average: " << subTotalTime.count() << " microseconds" << std::endl;
 	std::cout << "Multiplying(Long) Time Average: " << multiTotalTime.count() << " microseconds" << std::endl;
 	std::cout << "Dividing(Long) Time Average: " << divideTotalTime.count() << " microseconds" << std::endl;
+	std::cout << "Modulus Time Average: " << modTotalTime.count() << " microseconds" << std::endl;
 
 	std::cout << "---------------------TESTING COMPLETED----------------------" << std::endl;
 	std::cout << "Enter any character into the console to continue." << std::endl;
@@ -171,8 +175,8 @@ void Testing::TestingBigIntMultiplication(int trialsCount, bool stopOnFail)
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<int> distrib(INT_MIN, INT_MAX);
-	passCount = 0;
-	trialCount = 0;
+	int passCount = 0;
+	int trialCount = 0;
 
 	std::cout << "---------------------TESTING BIG INTEGER MultiplyToThis()----------------------" << std::endl;
 	std::cout << "Enter any character into the console to continue." << std::endl;
@@ -180,7 +184,7 @@ void Testing::TestingBigIntMultiplication(int trialsCount, bool stopOnFail)
 
 	for (int i = 0; i < trialsCount; i++)
 	{
-		BigInteger temp;
+		BigInteger a;
 		int randNum1 = distrib(gen);
 		int randNum2 = distrib(gen);
 
@@ -242,8 +246,8 @@ void Testing::TestingBigIntDivisionRandom(int trialsCount, bool stopOnFail)
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<int> distrib(INT_MIN, INT_MAX);
-	passCount = 0;
-	trialCount = 0;
+	int passCount = 0;
+	int trialCount = 0;
 
 	std::cout << "---------------------TESTING BIG INTEGER DivideToThis() Random----------------------" << std::endl;
 	std::cout << "Enter any character into the console to continue." << std::endl;
@@ -251,7 +255,7 @@ void Testing::TestingBigIntDivisionRandom(int trialsCount, bool stopOnFail)
 
 	for (int i = 0; i < trialsCount; i++)
 	{
-		BigInteger temp;
+		BigInteger a;
 		int randNum1 = distrib(gen);
 		int randNum2 = distrib(gen);
 
@@ -313,8 +317,8 @@ void Testing::TestingBigIntDivision(int trialsCount, bool stopOnFail)
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<int> distrib(INT_MIN, INT_MAX);
-	passCount = 0;
-	trialCount = 0;
+	int passCount = 0;
+	int trialCount = 0;
 
 	std::cout << "---------------------TESTING BIG INTEGER DivideToThis()----------------------" << std::endl;
 	std::cout << "Enter any character into the console to continue." << std::endl;
@@ -322,7 +326,7 @@ void Testing::TestingBigIntDivision(int trialsCount, bool stopOnFail)
 
 	for (int i = 1; i <= trialsCount; i++)
 	{
-		BigInteger temp;
+		BigInteger a;
 		int randNum1 = distrib(gen);
 
 		trialCount++;
@@ -376,6 +380,147 @@ void Testing::TestingBigIntDivision(int trialsCount, bool stopOnFail)
 
 }
 
+void Testing::TestingBigIntModulusRandom(int trialsCount, bool stopOnFail)
+{
+
+	std::string x;
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<int> distrib(INT_MIN, INT_MAX);
+	int passCount = 0;
+	int trialCount = 0;
+
+	std::cout << "---------------------TESTING BIG INTEGER ModulusToThis() Random----------------------" << std::endl;
+	std::cout << "Enter any character into the console to continue." << std::endl;
+	std::cin >> x;
+
+	for (int i = 0; i < trialsCount; i++)
+	{
+		BigInteger a;
+		int randNum1 = distrib(gen);
+		int randNum2 = distrib(gen);
+
+		trialCount++;
+
+		long long int correctAns = static_cast<long long int>(randNum1) % static_cast<long long int>(randNum2);
+
+		a = randNum1;
+
+		a.ModulusToThis(std::to_string(randNum2));
+
+		std::cout << std::endl;
+		std::cout << std::endl;
+		std::cout << "Trial " << trialCount << ": " << std::endl;
+		std::cout << randNum1 << " % " << randNum2 << std::endl;
+		std::cout << "Correct Answer: " << correctAns << std::endl;
+		std::cout << "Computed Answer: " << a << std::endl;
+
+		if (a == correctAns)
+		{
+
+			std::cout << "PASSED" << std::endl;
+			passCount++;
+
+		}
+		else
+		{
+
+			std::cout << "FAILED" << std::endl;
+			if (stopOnFail)
+			{
+
+				break;
+
+			}
+
+		}
+
+	}
+
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+	std::cout << "Test Results: " << std::endl;
+	std::cout << "Passed: " << passCount << std::endl;
+	std::cout << "Trials: " << trialCount << std::endl;
+
+	std::cout << "---------------------TESTING COMPLETED----------------------" << std::endl;
+	std::cout << "Enter any character into the console to continue." << std::endl;
+
+	std::cin >> x;
+
+}
+
+void Testing::TestingBigIntModulus(int trialsCount, bool stopOnFail)
+{
+
+	std::string x;
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<int> distrib(INT_MIN, INT_MAX);
+	int passCount = 0;
+	int trialCount = 0;
+
+	std::cout << "---------------------TESTING BIG INTEGER ModulusToThis()----------------------" << std::endl;
+	std::cout << "Enter any character into the console to continue." << std::endl;
+	std::cin >> x;
+
+	for (int i = 1; i <= trialsCount; i++)
+	{
+		BigInteger a;
+		int randNum1 = distrib(gen);
+
+		trialCount++;
+
+		long long int correctAns = static_cast<long long int>(randNum1) % static_cast<long long int>(i);
+
+		a = randNum1;
+
+		a.ModulusToThis(std::to_string(i));
+
+		std::cout << std::endl;
+		std::cout << std::endl;
+		std::cout << "Trial " << trialCount << ": " << std::endl;
+		std::cout << randNum1 << " % " << i << std::endl;
+		std::cout << "Correct Answer: " << correctAns << std::endl;
+		std::cout << "Computed Answer: " << a << std::endl;
+
+		if (a == correctAns)
+		{
+
+			std::cout << "PASSED" << std::endl;
+			passCount++;
+
+		}
+		else
+		{
+
+			std::cout << "FAILED" << std::endl;
+			if (stopOnFail)
+			{
+
+				break;
+
+			}
+
+		}
+
+	}
+
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+	std::cout << "Test Results: " << std::endl;
+	std::cout << "Passed: " << passCount << std::endl;
+	std::cout << "Trials: " << trialCount << std::endl;
+
+	std::cout << "---------------------TESTING COMPLETED----------------------" << std::endl;
+	std::cout << "Enter any character into the console to continue." << std::endl;
+
+	std::cin >> x;
+
+}
+
 void Testing::TestingBigIntGreaterThanOrEqualComparisonOperator(int trialsCount, bool stopOnFail)
 {
 
@@ -383,8 +528,8 @@ void Testing::TestingBigIntGreaterThanOrEqualComparisonOperator(int trialsCount,
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<int> distrib(INT_MIN / 2, INT_MAX / 2);
-	passCount = 0;
-	trialCount = 0;
+	int passCount = 0;
+	int trialCount = 0;
 
 	std::cout << "---------------------TESTING BIG INTEGER operator>=()----------------------" << std::endl;
 	std::cout << "Enter any character into the console to continue." << std::endl;
@@ -392,6 +537,9 @@ void Testing::TestingBigIntGreaterThanOrEqualComparisonOperator(int trialsCount,
 
 	for (int i = 0; i < trialsCount; i++)
 	{
+
+		BigInteger a;
+		BigInteger b;
 
 		int randNum1 = distrib(gen);
 		int randNum2 = distrib(gen);
@@ -449,8 +597,8 @@ void Testing::TestingBigIntLessThanOrEqualComparisonOperator(int trialsCount, bo
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<int> distrib(INT_MIN / 2, INT_MAX / 2);
-	passCount = 0;
-	trialCount = 0;
+	int passCount = 0;
+	int trialCount = 0;
 
 	std::cout << "---------------------TESTING BIG INTEGER operator<=()----------------------" << std::endl;
 	std::cout << "Enter any character into the console to continue." << std::endl;
@@ -458,6 +606,9 @@ void Testing::TestingBigIntLessThanOrEqualComparisonOperator(int trialsCount, bo
 
 	for (int i = 0; i < trialsCount; i++)
 	{
+
+		BigInteger a;
+		BigInteger b;
 
 		int randNum1 = distrib(gen);
 		int randNum2 = distrib(gen);
@@ -515,8 +666,8 @@ void Testing::TestingBigIntGreaterThanComparisonOperator(int trialsCount, bool s
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<int> distrib(INT_MIN / 2, INT_MAX / 2);
-	passCount = 0;
-	trialCount = 0;
+	int passCount = 0;
+	int trialCount = 0;
 
 	std::cout << "---------------------TESTING BIG INTEGER operator>()----------------------" << std::endl;
 	std::cout << "Enter any character into the console to continue." << std::endl;
@@ -524,6 +675,9 @@ void Testing::TestingBigIntGreaterThanComparisonOperator(int trialsCount, bool s
 
 	for (int i = 0; i < trialsCount; i++)
 	{
+
+		BigInteger a;
+		BigInteger b;
 
 		int randNum1 = distrib(gen);
 		int randNum2 = distrib(gen);
@@ -581,8 +735,8 @@ void Testing::TestingBigIntLessThanComparisonOperator(int trialsCount, bool stop
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<int> distrib(INT_MIN / 2, INT_MAX / 2);
-	passCount = 0;
-	trialCount = 0;
+	int passCount = 0;
+	int trialCount = 0;
 
 	std::cout << "---------------------TESTING BIG INTEGER operator<()----------------------" << std::endl;
 	std::cout << "Enter any character into the console to continue." << std::endl;
@@ -590,6 +744,9 @@ void Testing::TestingBigIntLessThanComparisonOperator(int trialsCount, bool stop
 
 	for (int i = 0; i < trialsCount; i++)
 	{
+
+		BigInteger a;
+		BigInteger b;
 
 		int randNum1 = distrib(gen);
 		int randNum2 = distrib(gen);
@@ -647,8 +804,8 @@ void Testing::TestingBigIntNotEqualComparisonOperator(int trialsCount, bool stop
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<int> distrib(INT_MIN / 2, INT_MAX / 2);
-	passCount = 0;
-	trialCount = 0;
+	int passCount = 0;
+	int trialCount = 0;
 
 	std::cout << "---------------------TESTING BIG INTEGER operator!=()----------------------" << std::endl;
 	std::cout << "Enter any character into the console to continue." << std::endl;
@@ -656,6 +813,9 @@ void Testing::TestingBigIntNotEqualComparisonOperator(int trialsCount, bool stop
 
 	for (int i = 0; i < trialsCount; i++)
 	{
+
+		BigInteger a;
+		BigInteger b;
 
 		int randNum1 = distrib(gen);
 		int randNum2 = distrib(gen);
@@ -712,8 +872,8 @@ void Testing::TestingBigIntEqualComparisonOperator(int trialsCount, bool stopOnF
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<int> distrib(INT_MIN / 2, INT_MAX / 2);
-	passCount = 0;
-	trialCount = 0;
+	int passCount = 0;
+	int trialCount = 0;
 
 	std::cout << "---------------------TESTING BIG INTEGER operator==()----------------------" << std::endl;
 	std::cout << "Enter any character into the console to continue." << std::endl;
@@ -721,6 +881,9 @@ void Testing::TestingBigIntEqualComparisonOperator(int trialsCount, bool stopOnF
 
 	for (int i = 0; i < trialsCount; i++)
 	{
+
+		BigInteger a;
+		BigInteger b;
 
 		int randNum1 = distrib(gen);
 
@@ -776,8 +939,8 @@ void Testing::TestingBigIntAdditionAssessmentOperator(int trialsCount, bool stop
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<int> distrib(INT_MIN / 2, INT_MAX / 2);
-	passCount = 0;
-	trialCount = 0;
+	int passCount = 0;
+	int trialCount = 0;
 
 	std::cout << "---------------------TESTING BIG INTEGER operator+=()----------------------" << std::endl;
 	std::cout << "Enter any character into the console to continue." << std::endl;
@@ -785,6 +948,8 @@ void Testing::TestingBigIntAdditionAssessmentOperator(int trialsCount, bool stop
 
 	for (int i = 0; i < trialsCount; i++)
 	{
+		
+		BigInteger a;
 
 		int randNum1 = distrib(gen);
 		int randNum2 = distrib(gen);
@@ -846,8 +1011,8 @@ void Testing::TestingBigIntSubtractionAssessmentOperator(int trialsCount, bool s
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<int> distrib(INT_MIN / 2, INT_MAX / 2);
-	passCount = 0;
-	trialCount = 0;
+	int passCount = 0;
+	int trialCount = 0;
 
 	std::cout << "---------------------TESTING BIG INTEGER operator-=()----------------------" << std::endl;
 	std::cout << "Enter any character into the console to continue." << std::endl;
@@ -855,6 +1020,8 @@ void Testing::TestingBigIntSubtractionAssessmentOperator(int trialsCount, bool s
 
 	for (int i = 0; i < trialsCount; i++)
 	{
+
+		BigInteger a;
 
 		int randNum1 = distrib(gen);
 		int randNum2 = distrib(gen);
@@ -918,8 +1085,8 @@ void Testing::TestingBigIntPostfixIncrementOperator(int trialsCount, bool stopOn
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<int> distrib(INT_MIN / 2, INT_MAX / 2);
-	passCount = 0;
-	trialCount = 0;
+	int passCount = 0;
+	int trialCount = 0;
 
 	std::cout << "---------------------TESTING BIG INTEGER operator++()----------------------" << std::endl;
 	std::cout << "Enter any character into the console to continue." << std::endl;
@@ -927,6 +1094,8 @@ void Testing::TestingBigIntPostfixIncrementOperator(int trialsCount, bool stopOn
 
 	for (int i = 0; i < trialsCount; i++)
 	{
+
+		BigInteger a;
 
 		int randNum1 = distrib(gen);
 		int randNum2 = distrib(gen);
@@ -992,8 +1161,8 @@ void Testing::TestingBigIntPrefixDecrementOperator(int trialsCount, bool stopOnF
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<int> distrib(INT_MIN / 2, INT_MAX / 2);
-	passCount = 0;
-	trialCount = 0;
+	int passCount = 0;
+	int trialCount = 0;
 
 	std::cout << "---------------------TESTING BIG INTEGER operator--()----------------------" << std::endl;
 	std::cout << "Enter any character into the console to continue." << std::endl;
@@ -1001,6 +1170,8 @@ void Testing::TestingBigIntPrefixDecrementOperator(int trialsCount, bool stopOnF
 
 	for (int i = 0; i < trialsCount; i++)
 	{
+
+		BigInteger a;
 
 		int randNum1 = distrib(gen);
 		int randNum2 = distrib(gen);
@@ -1065,8 +1236,8 @@ void Testing::TestingBigIntPostfixDecrementOperator(int trialsCount, bool stopOn
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<int> distrib(INT_MIN / 2, INT_MAX / 2);
-	passCount = 0;
-	trialCount = 0;
+	int passCount = 0;
+	int trialCount = 0;
 
 	std::cout << "---------------------TESTING BIG INTEGER operator--()----------------------" << std::endl;
 	std::cout << "Enter any character into the console to continue." << std::endl;
@@ -1074,6 +1245,8 @@ void Testing::TestingBigIntPostfixDecrementOperator(int trialsCount, bool stopOn
 
 	for (int i = 0; i < trialsCount; i++)
 	{
+
+		BigInteger a;
 
 		int randNum1 = distrib(gen);
 		int randNum2 = distrib(gen);
@@ -1137,8 +1310,8 @@ void Testing::TestingBigIntPrefixIncrementOperator(int trialsCount, bool stopOnF
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<int> distrib(INT_MIN / 2, INT_MAX / 2);
-	passCount = 0;
-	trialCount = 0;
+	int passCount = 0;
+	int trialCount = 0;
 
 	std::cout << "---------------------TESTING BIG INTEGER operator++()----------------------" << std::endl;
 	std::cout << "Enter any character into the console to continue." << std::endl;
@@ -1146,6 +1319,8 @@ void Testing::TestingBigIntPrefixIncrementOperator(int trialsCount, bool stopOnF
 
 	for (int i = 0; i < trialsCount; i++)
 	{
+
+		BigInteger a;
 
 		int randNum1 = distrib(gen);
 		int randNum2 = distrib(gen);
@@ -1210,8 +1385,8 @@ void Testing::TestingBigIntAssignmentOperator(int trialsCount, bool stopOnFail)
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<int> distrib(INT_MIN / 2, INT_MAX / 2);
-	passCount = 0;
-	trialCount = 0;
+	int passCount = 0;
+	int trialCount = 0;
 
 	std::cout << "---------------------TESTING BIG INTEGER operator=()----------------------" << std::endl;
 	std::cout << "Enter any character into the console to continue." << std::endl;
@@ -1219,6 +1394,8 @@ void Testing::TestingBigIntAssignmentOperator(int trialsCount, bool stopOnFail)
 
 	for (int i = 0; i < trialsCount; i++)
 	{
+
+		BigInteger a;
 
 		int randNum1 = distrib(gen);
 
@@ -1275,8 +1452,8 @@ void Testing::TestingBigIntAdditionOperator(int trialsCount, bool stopOnFail)
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<int> distrib(INT_MIN / 2, INT_MAX / 2);
-	passCount = 0;
-	trialCount = 0;
+	int passCount = 0;
+	int trialCount = 0;
 
 	std::cout << "---------------------TESTING BIG INTEGER operator+()----------------------" << std::endl;
 	std::cout << "Enter any character into the console to continue." << std::endl;
@@ -1284,6 +1461,8 @@ void Testing::TestingBigIntAdditionOperator(int trialsCount, bool stopOnFail)
 
 	for (int i = 0; i < trialsCount; i++)
 	{
+
+		BigInteger a;
 
 		int randNum1 = distrib(gen);
 		int randNum2 = distrib(gen);
@@ -1346,8 +1525,8 @@ void Testing::TestingBigIntSubtractionOperator(int trialsCount, bool stopOnFail)
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<int> distrib(INT_MIN / 2, INT_MAX / 2);
-	passCount = 0;
-	trialCount = 0;
+	int passCount = 0;
+	int trialCount = 0;
 
 	std::cout << "---------------------TESTING BIG INTEGER operator-()----------------------" << std::endl;
 	std::cout << "Enter any character into the console to continue." << std::endl;
@@ -1355,6 +1534,8 @@ void Testing::TestingBigIntSubtractionOperator(int trialsCount, bool stopOnFail)
 
 	for (int i = 0; i < trialsCount; i++)
 	{
+
+		BigInteger a;
 
 		int randNum1 = distrib(gen);
 		int randNum2 = distrib(gen);
@@ -1417,8 +1598,8 @@ void Testing::TestingBigIntAdd(int trialsCount, bool stopOnFail)
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<int> distrib(INT_MIN / 2, INT_MAX / 2);
-	passCount = 0;
-	trialCount = 0;
+	int passCount = 0;
+	int trialCount = 0;
 
 	std::cout << "---------------------TESTING BIG INTEGER ADD()----------------------" << std::endl;
 	std::cout << "Enter any character into the console to continue." << std::endl;
@@ -1427,6 +1608,8 @@ void Testing::TestingBigIntAdd(int trialsCount, bool stopOnFail)
 	for (int i = 0; i < trialsCount; i++)
 	{
 		BigInteger temp;
+		BigInteger a;
+
 		int randNum1 = distrib(gen);
 		int randNum2 = distrib(gen);
 
@@ -1490,8 +1673,8 @@ void Testing::TestingBigIntSub(int trialsCount, bool stopOnFail)
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<int> distrib(INT_MIN / 2, INT_MAX / 2);
-	passCount = 0;
-	trialCount = 0;
+	int passCount = 0;
+	int trialCount = 0;
 
 	std::cout << "---------------------TESTING BIG INTEGER SUBTOTHIS()----------------------" << std::endl;
 	std::cout << "Enter any character into the console to continue." << std::endl;
@@ -1501,6 +1684,8 @@ void Testing::TestingBigIntSub(int trialsCount, bool stopOnFail)
 	{
 
 		BigInteger temp;
+		BigInteger a;
+
 		int randNum1 = distrib(gen);
 		int randNum2 = distrib(gen);
 
@@ -1563,8 +1748,8 @@ void Testing::TestingBigIntAddToThis(int trialsCount, bool stopOnFail)
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<int> distrib(INT_MIN / 2, INT_MAX / 2);
-	passCount = 0;
-	trialCount = 0;
+	int passCount = 0;
+	int trialCount = 0;
 
 	std::cout << "---------------------TESTING BIG INTEGER ADDTOTHIS()----------------------" << std::endl;
 	std::cout << "Enter any character into the console to continue." << std::endl;
@@ -1572,6 +1757,8 @@ void Testing::TestingBigIntAddToThis(int trialsCount, bool stopOnFail)
 
 	for (int i = 0; i < trialsCount; i++)
 	{
+
+		BigInteger a;
 
 		int randNum1 = distrib(gen);
 		int randNum2 = distrib(gen);
@@ -1634,8 +1821,8 @@ void Testing::TestingBigIntSubToThis(int trialsCount, bool stopOnFail)
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<int> distrib(INT_MIN / 2, INT_MAX / 2);
-	passCount = 0;
-	trialCount = 0;
+	int passCount = 0;
+	int trialCount = 0;
 
 	std::cout << "---------------------TESTING BIG INTEGER SUBTOTHIS()----------------------" << std::endl;
 	std::cout << "Enter any character into the console to continue." << std::endl;
@@ -1643,6 +1830,8 @@ void Testing::TestingBigIntSubToThis(int trialsCount, bool stopOnFail)
 
 	for (int i = 0; i < trialsCount; i++)
 	{
+
+		BigInteger a;
 
 		int randNum1 = distrib(gen);
 		int randNum2 = distrib(gen);
