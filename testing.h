@@ -8,44 +8,42 @@
 #include "biginteger.h"
 
 
-class Testing
+namespace Testing
 {
 
-public:
+	void TestingBigIntMathTiming(int trialsCount, bool isRandom);
 
-	static void TestingBigIntMathTiming(int trialsCount, bool isRandom);
+	void TestingBigIntMultiplication(int trialsCount, bool stopOnFail);
+	void TestingBigIntDivisionRandom(int trialsCount, bool stopOnFail);
+	void TestingBigIntDivision(int trialsCount, bool stopOnFail);
+	void TestingBigIntModulusRandom(int trialsCount, bool stopOnFail);
+	void TestingBigIntModulus(int trialsCount, bool stopOnFail);
 
-	static void TestingBigIntMultiplication(int trialsCount, bool stopOnFail);
-	static void TestingBigIntDivisionRandom(int trialsCount, bool stopOnFail);
-	static void TestingBigIntDivision(int trialsCount, bool stopOnFail);
-	static void TestingBigIntModulusRandom(int trialsCount, bool stopOnFail);
-	static void TestingBigIntModulus(int trialsCount, bool stopOnFail);
+	void TestingBigIntGreaterThanOrEqualComparisonOperator(int trialsCount, bool stopOnFail);
+	void TestingBigIntLessThanOrEqualComparisonOperator(int trialsCount, bool stopOnFail);
+	void TestingBigIntGreaterThanComparisonOperator(int trialsCount, bool stopOnFail);
+	void TestingBigIntLessThanComparisonOperator(int trialsCount, bool stopOnFail);
 
-	static void TestingBigIntGreaterThanOrEqualComparisonOperator(int trialsCount, bool stopOnFail);
-	static void TestingBigIntLessThanOrEqualComparisonOperator(int trialsCount, bool stopOnFail);
-	static void TestingBigIntGreaterThanComparisonOperator(int trialsCount, bool stopOnFail);
-	static void TestingBigIntLessThanComparisonOperator(int trialsCount, bool stopOnFail);
+	void TestingBigIntNotEqualComparisonOperator(int trialsCount, bool stopOnFail);
+	void TestingBigIntEqualComparisonOperator(int trialsCount, bool stopOnFail);
 
-	static void TestingBigIntNotEqualComparisonOperator(int trialsCount, bool stopOnFail);
-	static void TestingBigIntEqualComparisonOperator(int trialsCount, bool stopOnFail);
+	void TestingBigIntAdditionAssessmentOperator(int trialsCount, bool stopOnFail);
+	void TestingBigIntSubtractionAssessmentOperator(int trialsCount, bool stopOnFail);
 
-	static void TestingBigIntAdditionAssessmentOperator(int trialsCount, bool stopOnFail);
-	static void TestingBigIntSubtractionAssessmentOperator(int trialsCount, bool stopOnFail);
+	void TestingBigIntPrefixDecrementOperator(int trialsCount, bool stopOnFail);
+	void TestingBigIntPostfixDecrementOperator(int trialsCount, bool stopOnFail);
+	void TestingBigIntPrefixIncrementOperator(int trialsCount, bool stopOnFail);
+	void TestingBigIntPostfixIncrementOperator(int trialsCount, bool stopOnFail);
 
-	static void TestingBigIntPrefixDecrementOperator(int trialsCount, bool stopOnFail);
-	static void TestingBigIntPostfixDecrementOperator(int trialsCount, bool stopOnFail);
-	static void TestingBigIntPrefixIncrementOperator(int trialsCount, bool stopOnFail);
-	static void TestingBigIntPostfixIncrementOperator(int trialsCount, bool stopOnFail);
+	void TestingBigIntAssignmentOperator(int trialsCount, bool stopOnFail);
 
-	static void TestingBigIntAssignmentOperator(int trialsCount, bool stopOnFail);
+	void TestingBigIntAdditionOperator(int trialsCount, bool stopOnFail);
+	void TestingBigIntSubtractionOperator(int trialsCount, bool stopOnFail);
 
-	static void TestingBigIntAdditionOperator(int trialsCount, bool stopOnFail);
-	static void TestingBigIntSubtractionOperator(int trialsCount, bool stopOnFail);
+	void TestingBigIntAdd(int trialsCount, bool stopOnFail);
+	void TestingBigIntSub(int trialsCount, bool stopOnFail);
 
-	static void TestingBigIntAdd(int trialsCount, bool stopOnFail);
-	static void TestingBigIntSub(int trialsCount, bool stopOnFail);
-
-	static void TestingBigIntAddToThis(int trialsCount, bool stopOnFail);
-	static void TestingBigIntSubToThis(int trialsCount, bool stopOnFail);
+	void TestingBigIntAddToThis(int trialsCount, bool stopOnFail);
+	void TestingBigIntSubToThis(int trialsCount, bool stopOnFail);
 
 };
